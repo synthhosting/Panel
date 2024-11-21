@@ -135,7 +135,7 @@ export default () => {
               </div>
               <a css={tw`ml-2 uppercase font-semibold`}>Players</a>
             </div>
-            <PlayersCounter uuid={server.uuid} />
+            <PlayersCounter uuid={uuid} />
           </div>
           <div css={tw`overflow-hidden whitespace-nowrap`}>
             <div css={tw`flex items-center`}>
