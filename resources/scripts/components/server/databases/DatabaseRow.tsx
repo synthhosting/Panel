@@ -185,7 +185,7 @@ export default ({ database, className }: Props) => {
                 </div>
                 {database.allowConnectionsFrom === '%' && (
                     <Can action={'database.view_on_phpmyadmin'}>
-                        <Button css={tw`mr-2`} onClick={openpmaURL}>
+                        <Button css={tw`mr-2`} variant="secondary" onClick={openpmaURL}>
                             <FontAwesomeIcon icon={faDatabase} fixedWidth />
                         </Button>
                     </Can>
@@ -194,6 +194,11 @@ export default ({ database, className }: Props) => {
                     <Can action={'database.view_password'}>
                         <Button css={tw`p-3! rounded-full! mr-2`} onClick={() => setConnectionVisible(true)}>
                             <LcIcon icon={Eye} size={20} />
+                        </Button>
+                    </Can>
+                    <Can action={'database.view_on_phpmyadmin'}>
+                        <Button css={tw`p-3! rounded-full! mr-2`} onClick={openpmaURL}>
+                            <FontAwesomeIcon icon={faDatabase} fixedWidth />
                         </Button>
                     </Can>
                     <Can action={'database.delete'}>
