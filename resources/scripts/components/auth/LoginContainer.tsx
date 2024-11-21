@@ -28,7 +28,12 @@ const LoginContainer = ({ history }: RouteComponentProps) => {
 
     const { clearFlashes, clearAndAddHttpError } = useFlash();
     const { enabled: recaptchaEnabled, siteKey } = useStoreState((state) => state.settings.data!.recaptcha);
-
+    const [passwordShown, setPasswordShown] = useState(false);
+    const togglePassword = () => {
+        // When the handler is invoked
+        // inverse the boolean state of passwordShown
+        setPasswordShown(!passwordShown);
+      };
     useEffect(() => {
         clearFlashes();
     }, []);
@@ -83,6 +88,7 @@ const LoginContainer = ({ history }: RouteComponentProps) => {
                 <LoginFormContainer title={'Login to Continue'} css={tw`w-full flex`}>
                     <Field type={'text'} label={'Username or Email'} name={'username'} disabled={isSubmitting} />
                     <div css={tw`mt-6 flex justify-between items-center`}>
+                        <Field light type={passwordShown ? "text" : "password"} label={'Password'} name={'password'} disabled={isSubmitting} />
                         <label htmlFor="password" css={tw`text-xs uppercase mb-1 sm:mb-2`}>Password</label>
                         <Link
                             to={'/auth/password'}
