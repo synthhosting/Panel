@@ -183,13 +183,6 @@ export default ({ database, className }: Props) => {
                     </CopyOnClick>
                     <p css={tw`mt-1 text-2xs uppercase select-none`}>Username</p>
                 </div>
-                {database.allowConnectionsFrom === '%' && (
-                    <Can action={'database.view_on_phpmyadmin'}>
-                        <Button css={tw`mr-2`} variant="secondary" onClick={openpmaURL}>
-                            <FontAwesomeIcon icon={faDatabase} fixedWidth />
-                        </Button>
-                    </Can>
-                )}
                 <div css={tw`ml-8`}>
                     <Can action={'database.view_password'}>
                         <Button css={tw`p-3! rounded-full! mr-2`} onClick={() => setConnectionVisible(true)}>
