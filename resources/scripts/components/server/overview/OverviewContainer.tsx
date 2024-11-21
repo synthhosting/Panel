@@ -19,7 +19,7 @@ import PlayersCounter from "@/components/server/players/PlayersCounter";
 
 type Stats = Record<"memory" | "cpu" | "disk" | "uptime" | "rx" | "tx", number>;
 
-export default () => {
+const OverviewContainer = () => {
   const bar_cpu = useStoreState((state: ApplicationStore) => state.helionix.data!.bar_cpu);
   const bar_memory = useStoreState((state: ApplicationStore) => state.helionix.data!.bar_memory);
   const bar_disk = useStoreState((state: ApplicationStore) => state.helionix.data!.bar_disk);
@@ -232,3 +232,5 @@ export default () => {
     </ServerContentBlock>
   );  
 };
+
+export default OverviewContainer;
