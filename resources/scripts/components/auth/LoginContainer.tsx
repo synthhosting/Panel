@@ -97,7 +97,7 @@ const LoginContainer = ({ history }: RouteComponentProps) => {
                     </div>
                     <div css={tw`mt-6`}>
                         <Field light type={passwordShown ? "text" : "password"} label={'Password'} name={'password'} disabled={isSubmitting} />
-                        <a style={{ color: "#000" }} onClick={togglePassword}>
+                        <a css={tw`text-xs uppercase mb-1 sm:mb-2 cursor-pointer`} onClick={togglePassword}>
                             {passwordShown ? <FontAwesomeIcon icon={faEyeSlash}/> : <FontAwesomeIcon icon={faEye}/>}
                             {passwordShown ? "Hide" : "Show"}
                         </a>
