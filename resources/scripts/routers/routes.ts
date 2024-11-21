@@ -16,6 +16,7 @@ import ActivityLogContainer from '@/components/dashboard/activity/ActivityLogCon
 import ServerActivityLogContainer from '@/components/server/ServerActivityLogContainer';
 import RustWipeContainer from '@/components/server/wipe/RustWipeContainer';
 import RustPluginsContainer from '@/components/server/RustPluginsContainer';
+import PluginManagerContainer from '@/components/server/plugin/PluginManagerContainer';
 import { ArchiveRestore, Bolt, CalendarCheck, CirclePlay, Database, Files, History, LayoutDashboard, Network, Terminal, UsersRound } from 'lucide-react';
 
 // Each of the router files is already code split out appropriately — so
@@ -39,6 +40,9 @@ interface RouteDefinition {
 interface ServerRouteDefinition extends RouteDefinition {
     permission: string | string[] | null;
     nestId?: number;
+    eggId?: number;
+    nestIds?: number[];
+    eggIds?: number[];
 }
 
 interface Routes {
@@ -150,6 +154,14 @@ export default {
             icon: CirclePlay,
             component: StartupContainer,
         },
+        {
+            path: '/plugins',
+            permission: 'file.*',
+            nestId: 1,
+            name: 'Plugin Manager',
+            icon: CirclePlay,
+            component: PluginManagerContainer,
+         },
         {
             path: '/wipe',
             permission: 'wipe.*',
