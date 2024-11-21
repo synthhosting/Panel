@@ -28,7 +28,12 @@ const LoginContainer = ({ history }: RouteComponentProps) => {
 
     const { clearFlashes, clearAndAddHttpError } = useFlash();
     const { enabled: recaptchaEnabled, siteKey } = useStoreState((state) => state.settings.data!.recaptcha);
-
+    const [passwordShown, setPasswordShown] = useState(false);
+    const togglePassword = () => {
+        // When the handler is invoked
+        // inverse the boolean state of passwordShown
+        setPasswordShown(!passwordShown);
+      };
     useEffect(() => {
         clearFlashes();
     }, []);
@@ -90,6 +95,10 @@ const LoginContainer = ({ history }: RouteComponentProps) => {
                         >
                             Forgot password?
                         </Link>
+                    </div>
+                    <div css={tw`mt-6`}>
+                        <Field light type={passwordShown ? "text" : "password"} label={'Password'} name={'password'} disabled={isSubmitting} />
+                        <a style={{ color: "#000" }} onClick={togglePassword}> {passwordShown ? <FontAwesomeIcon icon={faEyeSlash}/> : <FontAwesomeIcon icon={faEye}/>   } {passwordShown ? "Hide" : "Show"} </a>   
                     </div>
                     <Field type={'password'} name={'password'} disabled={isSubmitting} />
                     <div css={tw`mt-6`}>
