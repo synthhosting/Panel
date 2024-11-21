@@ -3,6 +3,7 @@ import { LucideProps } from 'lucide-react';
 import tw from 'twin.macro';
 import isEqual from 'react-fast-compare';
 import LcIcon from './LcIcon';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExternalLinkAlt } from '@fortawesome/free-solid-svg-icons';
 
 interface Props {
@@ -23,7 +24,7 @@ const TitledGreyBox = ({ icon, title, link, children, className }: Props) => (
                     {link && (
                         <span css={tw`ml-auto`}>
                             <a href={link} target='_blank' rel='noreferrer'>
-                                <LcIcon icon={faExternalLinkAlt} css={tw`mr-2 text-neutral-300`} />
+                                <FontAwesomeIcon icon={faExternalLinkAlt} css={tw`mr-2 text-neutral-300`} />
                             </a>
                         </span>
                     )}
