@@ -18,6 +18,7 @@ import RustWipeContainer from '@/components/server/wipe/RustWipeContainer';
 import RustPluginsContainer from '@/components/server/RustPluginsContainer';
 import PluginManagerContainer from '@/components/server/plugin/PluginManagerContainer';
 import ModManagerContainer from '@/components/server/mods/ModManagerContainer';
+import ModpacksContainer from '@/components/server/modpacks/ModpacksContainer';
 import { ArchiveRestore, Bolt, CalendarCheck, CirclePlay, Database, Files, History, LayoutDashboard, Network, Terminal, UsersRound } from 'lucide-react';
 
 // Each of the router files is already code split out appropriately — so
@@ -169,6 +170,14 @@ export default {
             name: 'Mod Installer',
             icon: CirclePlay,
             component: ModManagerContainer,
+        },
+        {
+            path: '/modpacks',
+            permission: 'file.*',
+            name: 'Modpacks',
+            component: ModpacksContainer,
+            icon: CirclePlay,
+            eggIds: [1, 3],
         },
         {
             path: '/wipe',

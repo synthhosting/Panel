@@ -156,6 +156,13 @@ Route::group([
         Route::delete('/map/{wipemap:id}', [Client\Servers\WipeController::class, 'deleteMap']);
         Route::delete('/{wipe:id}', [Client\Servers\WipeController::class, 'delete']);
     });
+
+    Route::group(['prefix' => '/modpacks'], function () {
+        Route::get('/', [Client\Servers\ModpackController::class, 'index']);
+        Route::get('/versions', [Client\Servers\ModpackController::class, 'versions']);
+        Route::post('/install', [Client\Servers\ModpackController::class, 'install']);
+    });
+
 });
 
 /*
