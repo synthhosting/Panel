@@ -1,0 +1,72 @@
+.button {
+    @apply px-4 py-2 inline-flex items-center justify-center;
+    @apply rounded text-base font-semibold transition-all duration-100;
+
+    /* Sizing Controls */
+    &.small {
+        @apply px-4 py-0 h-8 font-normal text-sm;
+    }
+
+    &.large {
+        @apply px-5 py-3;
+    }
+
+    &.secondary {
+        @apply text-gray-50 bg-transparent;
+
+        &:disabled {
+            background: transparent !important;
+        }
+    }
+
+    &:disabled {
+        @apply cursor-not-allowed;
+    }
+
+    &.square {
+        @apply p-0 w-12 h-12;
+
+        &.small {
+            @apply w-8 h-8;
+        }
+    }
+}
+
+.primary {
+    @apply bg-helionix-btnPrimary rounded-[10px];
+    @apply hover:bg-helionix-btnPrimaryHover active:bg-helionix-btnPrimaryHover;
+
+    &.secondary {
+        @apply hover:bg-helionix-btnPrimary active:bg-helionix-btnPrimary;
+    }
+
+    &:disabled {
+        @apply bg-helionix-btnPrimary bg-opacity-75;
+    }
+}
+
+.text {
+    @apply bg-helionix-btnSecondary rounded-[10px];
+    @apply hover:bg-helionix-btnSecondaryHover active:bg-helionix-btnSecondaryHover;
+
+    &.secondary {
+        @apply hover:bg-helionix-btnSecondaryHover active:bg-helionix-btnSecondaryHover;
+    }
+
+    &:disabled {
+        @apply bg-helionix-btnSecondary bg-opacity-75;
+    }
+}
+
+.danger {
+    @apply bg-helionix-btnDanger rounded-[10px];
+    @apply hover:bg-helionix-btnDangerHover active:bg-helionix-btnDangerHover;
+
+    &.secondary {
+        @apply hover:bg-helionix-btnDangerHover active:bg-helionix-btnDangerHover;
+    }
+
+    &:disabled {
+        @apply bg-helionix-btnDanger bg-opacity-75;
+    }
+}
