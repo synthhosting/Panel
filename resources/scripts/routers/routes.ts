@@ -17,6 +17,7 @@ import ServerActivityLogContainer from '@/components/server/ServerActivityLogCon
 import RustWipeContainer from '@/components/server/wipe/RustWipeContainer';
 import RustPluginsContainer from '@/components/server/RustPluginsContainer';
 import PluginManagerContainer from '@/components/server/plugin/PluginManagerContainer';
+import ModManagerContainer from '@/components/server/mods/ModManagerContainer';
 import { ArchiveRestore, Bolt, CalendarCheck, CirclePlay, Database, Files, History, LayoutDashboard, Network, Terminal, UsersRound } from 'lucide-react';
 
 // Each of the router files is already code split out appropriately — so
@@ -161,7 +162,14 @@ export default {
             name: 'Plugin Manager',
             icon: CirclePlay,
             component: PluginManagerContainer,
-         },
+        },
+        {
+            path: '/mods',
+            permissions: 'file.*',
+            name: 'Mod Installer',
+            icon: CirclePlay,
+            component: ModManagerContainer,
+        },
         {
             path: '/wipe',
             permission: 'wipe.*',
