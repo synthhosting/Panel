@@ -46,5 +46,5 @@ jobs:
           yarn add lucide-react
           yarn build:production
           php artisan optimize:clear
-          ./install_script.sh | ainx install autoallocationmanager.ainx
+          php artisan view:clear && php artisan cache:clear && php artisan route:clear && php artisan migrate --force && chown -R www-data:www-data *
 

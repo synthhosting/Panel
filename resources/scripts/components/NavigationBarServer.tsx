@@ -26,6 +26,8 @@ import LogoContainer from "@/components/elements/helionix/navigation/LogoContain
 import CategoryContainer from "@/components/elements/helionix/navigation/CategoryContainer";
 import NavigationButton from "@/components/elements/helionix/navigation/NavigationButton";
 import LcIcon from '@/components/elements/LcIcon';
+import { PermissionRoute } from 'some-route-library';
+import { Spinner } from 'some-spinner-library';
 
 export default () => {
     const logo = useStoreState((state: ApplicationStore) => state.helionix.data!.logo);
@@ -35,6 +37,7 @@ export default () => {
     const rootAdmin = useStoreState((state: ApplicationStore) => state.user.data!.rootAdmin);
     const announcement = useStoreState((state: ApplicationStore) => state.helionix.data!.announcements_status);
     const uptime = useStoreState((state: ApplicationStore) => state.helionix.data!.uptime_nodes_status);
+    const serverNestId = ServerContext.useStoreState((state) => state.server.data?.nestId);
     const [isLoggingOut, setIsLoggingOut] = useState(false);
     const [isNavVisible, setIsNavVisible] = useState(false);
     const navRef = useRef<HTMLDivElement>(null);
@@ -138,12 +141,14 @@ export default () => {
                     .filter((route) => !!route.name)
                     .map((route) =>
                     route.permission ? (
-                        <Can key={route.path} action={route.permission} matchAny>
-                            <NavLink to={to(route.path, true)} exact={route.exact} css={tw`flex items-center`}>
-                                <LcIcon icon={route.icon} size={20}/>
-                                <NavigationButton>{route.name}</NavigationButton>
-                            </NavLink>
-                        </Can>
+                        (!route.nestId || route.nestId === serverNestId) && (
+                            <Can key={route.path} action={route.permission} matchAny>
+                                <NavLink to={to(route.path, true)} exact={route.exact} css={tw`flex items-center`}>
+                                    <LcIcon icon={route.icon} size={20}/>
+                                    <NavigationButton>{route.name}</NavigationButton>
+                                </NavLink>
+                            </Can>
+                        )
                     ) : (
                         <NavLink key={route.path} to={to(route.path, true)} exact={route.exact} css={tw`flex items-center`}>
                             <LcIcon icon={route.icon} size={20} />
@@ -151,6 +156,15 @@ export default () => {
                         </NavLink>
                     )
                     )}
+                {routes.server.map(({ path, permission, component: Component, nestId }) => (
+                    (!nestId || nestId === serverNestId) && (
+                        <PermissionRoute key={path} permission={permission} path={to(path)} exact>
+                            <Spinner.Suspense>
+                                <Component />
+                            </Spinner.Suspense>
+                        </PermissionRoute>
+                    )
+                ))}
                 {rootAdmin && (
                     // eslint-disable-next-line react/jsx-no-target-blank
                     <a href={`/admin/servers/view/${serverId}`} target={"_blank"} css={tw`flex`}>

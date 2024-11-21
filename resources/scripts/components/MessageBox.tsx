@@ -7,6 +7,7 @@ export type FlashMessageType = 'success' | 'info' | 'warning' | 'error';
 interface Props {
     title?: string;
     children: string;
+    children: React.ReactNode;
     type?: FlashMessageType;
 }
 

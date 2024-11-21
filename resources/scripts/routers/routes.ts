@@ -14,6 +14,7 @@ import AccountApiContainer from '@/components/dashboard/AccountApiContainer';
 import AccountSSHContainer from '@/components/dashboard/ssh/AccountSSHContainer';
 import ActivityLogContainer from '@/components/dashboard/activity/ActivityLogContainer';
 import ServerActivityLogContainer from '@/components/server/ServerActivityLogContainer';
+import RustPluginsContainer from '@/components/server/RustPluginsContainer';
 import { ArchiveRestore, Bolt, CalendarCheck, CirclePlay, Database, Files, History, LayoutDashboard, Network, Terminal, UsersRound } from 'lucide-react';
 
 // Each of the router files is already code split out appropriately — so
@@ -36,6 +37,7 @@ interface RouteDefinition {
 
 interface ServerRouteDefinition extends RouteDefinition {
     permission: string | string[] | null;
+    nestId?: number;
 }
 
 interface Routes {
@@ -146,6 +148,13 @@ export default {
             name: "Startup",
             icon: CirclePlay,
             component: StartupContainer,
+        },
+        {
+            path: '/activity',
+            permission: 'activity.*',
+            name: 'Activity',
+            icon: Bolt,
+            component: ServerActivityLogContainer,
         },
         {
             path: "/settings",
