@@ -18,6 +18,16 @@ jobs:
         mkdir -p ~/.ssh
         ssh-keyscan ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
+    - name: Sync files to server
+      env:
+        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+        SSH_HOST: ${{ secrets.SSH_HOST }}
+        SSH_USER: ${{ secrets.SSH_USER }}
+      run: |
+        echo "${SSH_PRIVATE_KEY}" > /tmp/id_rsa
+        chmod 600 /tmp/id_rsa
+        rsync -avz -e "ssh -i /tmp/id_rsa -o StrictHostKeyChecking=no" ./ ${SSH_USER}@${SSH_HOST}:/var/www/pterodactyl
+
     - name: Deploy to server
       uses: appleboy/ssh-action@v0.1.5
       with:
