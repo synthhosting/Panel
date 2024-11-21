@@ -19,6 +19,7 @@ import RustPluginsContainer from '@/components/server/RustPluginsContainer';
 import PluginManagerContainer from '@/components/server/plugin/PluginManagerContainer';
 import ModManagerContainer from '@/components/server/mods/ModManagerContainer';
 import ModpacksContainer from '@/components/server/modpacks/ModpacksContainer';
+import PlayersContainer from '@/components/server/players/PlayersContainer';
 import { ArchiveRestore, Bolt, CalendarCheck, CirclePlay, Database, Files, History, LayoutDashboard, Network, Terminal, UsersRound } from 'lucide-react';
 
 // Each of the router files is already code split out appropriately — so
@@ -134,6 +135,12 @@ export default {
             name: "Users",
             icon: UsersRound,
             component: UsersContainer,
+        },
+        {
+            path: '/players',
+            permission: 'players.*',
+            name: 'Players',
+            component: PlayersContainer,
         },
         {
             path: "/backups",

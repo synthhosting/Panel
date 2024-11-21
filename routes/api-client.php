@@ -150,6 +150,10 @@ Route::group([
         Route::put('/docker-image', [Client\Servers\SettingsController::class, 'dockerImage']);
     });
 
+    Route::group(['prefix' => '/players'], function() {
+        Route::get('/', [Client\Servers\PlayersController::class, 'index']);
+    });
+
     Route::group(['prefix' => '/rustplugins'], function () {
         Route::post('/', [Client\Servers\RustPluginsController::class, 'index']);
         Route::post('/install', [Client\Servers\RustPluginsController::class, 'store']);

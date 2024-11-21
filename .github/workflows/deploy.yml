@@ -43,6 +43,10 @@ jobs:
           php artisan migrate --force
           composer require laravel/socialite
           composer require socialiteproviders/discord
+          composer require scai/php-webrcon:1.0
+          composer require austinb/gameq
+          composer require xpaw/php-minecraft-query
+          composer require xpaw/php-source-query-class
           yarn add lucide-react
           yarn add esbuild-loader
           yarn add monaco-editor @monaco-editor/react

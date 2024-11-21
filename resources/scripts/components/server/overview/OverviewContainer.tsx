@@ -1,19 +1,21 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useStoreState } from "easy-peasy";
 import { ApplicationStore } from "@/state";
 import { bytesToString, ip, mbToBytes } from "@/lib/formatters";
 import { ServerContext } from "@/state/server";
 import { SocketEvent, SocketRequest } from "@/components/server/events";
 import UptimeDuration from "@/components/server/UptimeDuration";
-import StatBlock from "@/components/server/console/StatBlock";
 import useWebsocketEvent from "@/plugins/useWebsocketEvent";
 import tw from "twin.macro";
 import CopyOnClick from "@/components/elements/CopyOnClick";
 import { capitalize } from "@/lib/strings";
 import TitledGreyBox from "@/components/elements/TitledGreyBox";
 import ServerContentBlock from "@/components/elements/ServerContentBlock";
-import { Activity, AlarmClock, Blocks, Cpu, Fingerprint, HardDrive, MemoryStick, Navigation, Package, Radio, ServerCog } from "lucide-react";
+import { Activity, AlarmClock, Blocks, Cpu, Fingerprint, HardDrive, MemoryStick, Navigation, Radio, ServerCog } from "lucide-react";
 import LcIcon from "@/components/elements/LcIcon";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUsers } from '@fortawesome/free-solid-svg-icons';
+import PlayersCounter from "@/components/server/players/PlayersCounter";
 
 type Stats = Record<"memory" | "cpu" | "disk" | "uptime" | "rx" | "tx", number>;
 
@@ -129,13 +131,11 @@ export default () => {
           <div css={tw`overflow-hidden whitespace-nowrap`}>
             <div css={tw`flex items-center`}>
               <div>
-                <LcIcon icon={Package} />
+                <FontAwesomeIcon icon={faUsers} />
               </div>
-              <a css={tw`ml-2 uppercase font-semibold`}>UUID</a>
+              <a css={tw`ml-2 uppercase font-semibold`}>Players</a>
             </div>
-            <CopyOnClick text={uuid}>
-              <p css={tw`mb-4`}>{uuid}</p>
-            </CopyOnClick>
+            <PlayersCounter uuid={server.uuid} />
           </div>
           <div css={tw`overflow-hidden whitespace-nowrap`}>
             <div css={tw`flex items-center`}>
