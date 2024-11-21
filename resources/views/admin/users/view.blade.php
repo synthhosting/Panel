@@ -101,6 +101,32 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-6">
+            <div class="box">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Role</h3>
+                </div>
+                <div class="box-body">
+                    <div class="form-group">
+                        <label for="role" class="control-label">Role</label>
+                        <div>
+                        <select name="role" class="form-control">
+                            @if(count($roles) < 1)
+                                <option value="0" selected>None</option>
+                            @else
+                                @foreach($roles as $role)
+                                    <?php $r_id = $role->id; ?>
+                                    <option value="{{ $r_id }}" @if($u_role == $r_id) selected @endif>{{ $role->name }}</option>
+                                @endforeach
+                                <option value="0" @if($u_role == 0) selected @endif>None</option>
+                            @endif
+                            </select>
+                            <p class="text-muted"><small>When a role is assigned, the user will only be able to perform actions and see pages to the permissions of the role.</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </form>
     <div class="col-sm-6">
         <div class="box box-warning">
