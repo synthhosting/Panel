@@ -35,6 +35,7 @@ export default () => {
     const rootAdmin = useStoreState((state: ApplicationStore) => state.user.data!.rootAdmin);
     const announcement = useStoreState((state: ApplicationStore) => state.helionix.data!.announcements_status);
     const uptime = useStoreState((state: ApplicationStore) => state.helionix.data!.uptime_nodes_status);
+    const serverNestId = ServerContext.useStoreState((state) => state.server.data?.nestId);
     const [isLoggingOut, setIsLoggingOut] = useState(false);
     const [isNavVisible, setIsNavVisible] = useState(false);
     const navRef = useRef<HTMLDivElement>(null);
