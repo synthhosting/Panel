@@ -7,8 +7,9 @@ import { ServerContext } from '@/state/server';
 import TitledGreyBox from '@/components/elements/TitledGreyBox';
 
 //! Icons
-import { faCircle, faUsers, faMap, faInfoCircle, faServer, faCodeBranch, faBug, faFire, faStopwatch } from '@fortawesome/free-solid-svg-icons';
+import { faCircle, faUsers, faMap, faInfoCircle, faCodeBranch, faBug, faFire, faStopwatch } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Server } from 'lucide-react'; // Import a compatible Lucide icon
 
 //! Plugins
 import useFlash from '@/plugins/useFlash';
@@ -40,7 +41,7 @@ const ServerInformation = () => {
     }, [error]);
 
     return (
-        <TitledGreyBox css={tw`break-words mt-4`} title={"Server Information"} icon={faServer}>
+        <TitledGreyBox css={tw`break-words mt-4`} title={"Server Information"} icon={Server}>
             {!data ? (
                 <>
                     <p css={tw`text-xs mt-2`}>
