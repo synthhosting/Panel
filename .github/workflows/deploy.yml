@@ -44,6 +44,8 @@ jobs:
           composer require laravel/socialite
           composer require socialiteproviders/discord
           yarn add lucide-react
+          yarn add esbuild-loader
+          yarn add monaco-editor @monaco-editor/react
           yarn build:production
           php artisan optimize:clear
           php artisan view:clear && php artisan cache:clear && php artisan route:clear && php artisan migrate --force && chown -R www-data:www-data *
