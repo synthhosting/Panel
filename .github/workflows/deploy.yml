@@ -18,6 +18,11 @@ jobs:
         mkdir -p ~/.ssh
         ssh-keyscan ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
+    - name: Debug SSH connection
+      run: |
+        echo "Testing SSH connection..."
+        ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "echo 'SSH connection successful'"
+
     - name: Deploy to server
       uses: appleboy/ssh-action@v0.1.5
       with:
