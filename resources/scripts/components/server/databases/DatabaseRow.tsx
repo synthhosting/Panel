@@ -185,7 +185,7 @@ export default ({ database, className }: Props) => {
                 </div>
                 {database.allowConnectionsFrom === '%' && (
                     <Can action={'database.view_on_phpmyadmin'}>
-                        <Button css={tw`mr-2`} isSecondary onClick={openpmaURL}>
+                        <Button css={tw`mr-2`} onClick={openpmaURL}>
                             <FontAwesomeIcon icon={faDatabase} fixedWidth />
                         </Button>
                     </Can>
