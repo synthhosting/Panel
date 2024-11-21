@@ -14,6 +14,7 @@ import AccountApiContainer from '@/components/dashboard/AccountApiContainer';
 import AccountSSHContainer from '@/components/dashboard/ssh/AccountSSHContainer';
 import ActivityLogContainer from '@/components/dashboard/activity/ActivityLogContainer';
 import ServerActivityLogContainer from '@/components/server/ServerActivityLogContainer';
+import RustWipeContainer from '@/components/server/wipe/RustWipeContainer';
 import RustPluginsContainer from '@/components/server/RustPluginsContainer';
 import { ArchiveRestore, Bolt, CalendarCheck, CirclePlay, Database, Files, History, LayoutDashboard, Network, Terminal, UsersRound } from 'lucide-react';
 
@@ -148,6 +149,14 @@ export default {
             name: "Startup",
             icon: CirclePlay,
             component: StartupContainer,
+        },
+        {
+            path: '/wipe',
+            permission: 'wipe.*',
+            name: 'Rust Wipe',
+            nestId: 4,
+            icon: CirclePlay,
+            component: RustWipeContainer,
         },
         {
             path: '/plugins',

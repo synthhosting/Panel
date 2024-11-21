@@ -144,6 +144,17 @@ Route::group([
         Route::post('/', [Client\Servers\RustPluginsController::class, 'index']);
         Route::post('/install', [Client\Servers\RustPluginsController::class, 'store']);
     });
+
+    Route::group(['prefix' => '/wipe'], function () {
+        Route::get('/', [Client\Servers\WipeController::class, 'index']);
+    
+        Route::post('/timezone', [Client\Servers\WipeController::class, 'timezone']);
+        Route::post('/map', [Client\Servers\WipeController::class, 'map']);
+        Route::post('/{wipe:id?}', [Client\Servers\WipeController::class, 'store']);
+    
+        Route::delete('/map/{wipemap:id}', [Client\Servers\WipeController::class, 'deleteMap']);
+        Route::delete('/{wipe:id}', [Client\Servers\WipeController::class, 'delete']);
+    });
 });
 
 /*

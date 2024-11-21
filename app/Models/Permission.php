@@ -64,6 +64,7 @@ class Permission extends Model
     public const ACTION_SETTINGS_REINSTALL = 'settings.reinstall';
 
     public const ACTION_ACTIVITY_READ = 'activity.read';
+    public const ACTION_WIPE_MANAGE = 'wipe.manage';
     public const ACTION_RUSTPLUGINS_MANAGE = 'rustplugins.mamage';
 
     /**
@@ -212,6 +213,13 @@ class Permission extends Model
             'description' => 'Permissions that control a user\'s access to the rust plugins installer for this server.',
             'keys' => [
                 'manage' => 'Allows a user to manage the rust plugins for the server.',
+            ],
+        ],
+
+        'wipe' => [
+            'description' => 'Permissions that control a user\'s access to the rust server wiper.',
+            'keys' => [
+                'manage' => 'Allows a user to use the rust wiper for the server.',
             ],
         ],
     ];

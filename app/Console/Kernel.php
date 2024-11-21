@@ -6,6 +6,7 @@ use Ramsey\Uuid\Uuid;
 use Pterodactyl\Models\ActivityLog;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Database\Console\PruneCommand;
+use Pterodactyl\Console\Commands\Server\RustWipeCommand;
 use Pterodactyl\Repositories\Eloquent\SettingsRepository;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use Pterodactyl\Services\Telemetry\TelemetryCollectionService;
@@ -38,6 +39,7 @@ class Kernel extends ConsoleKernel
         // Execute scheduled commands for servers every minute, as if there was a normal cron running.
         $schedule->command(ProcessRunnableCommand::class)->everyMinute()->withoutOverlapping();
         $schedule->command(CleanServiceBackupFilesCommand::class)->daily();
+        $schedule->command(RustWipeCommand::class)->everyMinute();
         $schedule->command(CheckRustPluginVersionsCommand::class)->daily();
 
         if (config('backups.prune_age')) {

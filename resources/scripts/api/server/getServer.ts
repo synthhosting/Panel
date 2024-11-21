@@ -17,6 +17,7 @@ export interface Server {
     uuid: string;
     name: string;
     node: string;
+    timezone: string;
     eggName: string;
     eggImage: string;
     eggId: number;
@@ -55,6 +56,7 @@ export const rawDataToServerObject = ({ attributes: data }: FractalResponseData)
     uuid: data.uuid,
     name: data.name,
     node: data.node,
+    timezone: data.timezone,
     eggName: data.egg_name,
     eggImage: data.egg_image,
     nestId: data.nest_id,

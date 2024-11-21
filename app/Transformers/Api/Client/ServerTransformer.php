@@ -43,6 +43,7 @@ class ServerTransformer extends BaseClientTransformer
             'uuid' => $server->uuid,
             'name' => $server->name,
             'node' => $server->node->name,
+            'timezone' => $server->timezone,
             'nest_id' => $server->nest_id,
             'egg_name' => $server->egg->name,
             'egg_image' => $server->egg->image,
