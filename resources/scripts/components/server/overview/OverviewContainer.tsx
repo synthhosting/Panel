@@ -1,25 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useStoreState } from "easy-peasy";
 import { ApplicationStore } from "@/state";
 import { bytesToString, ip, mbToBytes } from "@/lib/formatters";
 import { ServerContext } from "@/state/server";
 import { SocketEvent, SocketRequest } from "@/components/server/events";
 import UptimeDuration from "@/components/server/UptimeDuration";
+import StatBlock from "@/components/server/console/StatBlock";
 import useWebsocketEvent from "@/plugins/useWebsocketEvent";
 import tw from "twin.macro";
 import CopyOnClick from "@/components/elements/CopyOnClick";
 import { capitalize } from "@/lib/strings";
 import TitledGreyBox from "@/components/elements/TitledGreyBox";
 import ServerContentBlock from "@/components/elements/ServerContentBlock";
-import { Activity, AlarmClock, Blocks, Cpu, Fingerprint, HardDrive, MemoryStick, Navigation, Radio, ServerCog } from "lucide-react";
+import { Activity, AlarmClock, Blocks, Cpu, Fingerprint, HardDrive, MemoryStick, Navigation, Package, Radio, ServerCog } from "lucide-react";
 import LcIcon from "@/components/elements/LcIcon";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUsers } from '@fortawesome/free-solid-svg-icons';
-import PlayersCounter from "@/components/server/players/PlayersCounter";
 
 type Stats = Record<"memory" | "cpu" | "disk" | "uptime" | "rx" | "tx", number>;
 
-const OverviewContainer = () => {
+export default () => {
   const bar_cpu = useStoreState((state: ApplicationStore) => state.helionix.data!.bar_cpu);
   const bar_memory = useStoreState((state: ApplicationStore) => state.helionix.data!.bar_memory);
   const bar_disk = useStoreState((state: ApplicationStore) => state.helionix.data!.bar_disk);
@@ -131,11 +129,13 @@ const OverviewContainer = () => {
           <div css={tw`overflow-hidden whitespace-nowrap`}>
             <div css={tw`flex items-center`}>
               <div>
-                <FontAwesomeIcon icon={faUsers} />
+                <LcIcon icon={Package} />
               </div>
-              <a css={tw`ml-2 uppercase font-semibold`}>Players</a>
+              <a css={tw`ml-2 uppercase font-semibold`}>UUID</a>
             </div>
-            <PlayersCounter uuid={uuid} />
+            <CopyOnClick text={uuid}>
+              <p css={tw`mb-4`}>{uuid}</p>
+            </CopyOnClick>
           </div>
           <div css={tw`overflow-hidden whitespace-nowrap`}>
             <div css={tw`flex items-center`}>
@@ -232,5 +232,3 @@ const OverviewContainer = () => {
     </ServerContentBlock>
   );  
 };
-
-export default OverviewContainer;
