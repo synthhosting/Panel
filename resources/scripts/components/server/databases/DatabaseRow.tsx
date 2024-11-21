@@ -191,7 +191,7 @@ export default ({ database, className }: Props) => {
                     </Can>
                     <Can action={'database.view_on_phpmyadmin'}>
                         <Button css={tw`p-3! rounded-full! mr-2`} onClick={openpmaURL}>
-                            <FontAwesomeIcon icon={faDatabase} size={20} />
+                            <LcIcon icon={Database} size={20} />
                         </Button>
                     </Can>
                     <Can action={'database.delete'}>
