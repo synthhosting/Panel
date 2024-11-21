@@ -13,17 +13,19 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v2
 
-    - name: Set up SSH
-      uses: webfactory/ssh-agent@v0.5.3
-      with:
-        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+    - name: Add server to known hosts
+      run: |
+        mkdir -p ~/.ssh
+        ssh-keyscan ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
 
     - name: Deploy to server
-      env:
-        SSH_HOST: ${{ secrets.SSH_HOST }}
-        SSH_USER: ${{ secrets.SSH_USER }}
-      run: |
-        ssh $SSH_USER@$SSH_HOST << 'EOF'
+      uses: appleboy/ssh-action@v0.1.5
+      with:
+        host: ${{ secrets.SSH_HOST }}
+        username: ${{ secrets.SSH_USER }}
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        passphrase: ${{ secrets.SSH_PASSPHRASE }}
+        script: |
           cd /var/www/pterodactyl
           php artisan migrate --force
           composer require laravel/socialite
@@ -31,4 +33,3 @@ jobs:
           yarn add lucide-react
           yarn build:production
           php artisan optimize:clear
-        EOF
