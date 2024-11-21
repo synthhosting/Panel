@@ -96,7 +96,7 @@ const LoginContainer = ({ history }: RouteComponentProps) => {
                         </Link>
                     </div>
                     <div css={tw`mt-6`}>
-                        <Field type={passwordShown ? "text" : "password"} label={'Password'} name={'password'} disabled={isSubmitting} />
+                        <Field type={passwordShown ? "text" : "password"} label={'Password'} disabled={isSubmitting} />
                         <a css={tw`text-xs uppercase mb-1 sm:mb-2 cursor-pointer`} onClick={togglePassword}>
                             {passwordShown ? <FontAwesomeIcon icon={faEyeSlash}/> : <FontAwesomeIcon icon={faEye}/>}
                             {passwordShown ? "Hide" : "Show"}
