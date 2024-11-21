@@ -154,6 +154,7 @@ export default {
             permission: 'rustplugins.*',
             name: 'Rust Plugins',
             nestId: 4,
+            icon: CirclePlay,
             component: RustPluginsContainer,
         },
         {
