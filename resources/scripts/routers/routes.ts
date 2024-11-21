@@ -150,11 +150,11 @@ export default {
             component: StartupContainer,
         },
         {
-            path: '/activity',
-            permission: 'activity.*',
-            name: 'Activity',
-            icon: Bolt,
-            component: ServerActivityLogContainer,
+            path: '/plugins',
+            permission: 'rustplugins.*',
+            name: 'Rust Plugins',
+            nestId: 4,
+            component: RustPluginsContainer,
         },
         {
             path: "/settings",
