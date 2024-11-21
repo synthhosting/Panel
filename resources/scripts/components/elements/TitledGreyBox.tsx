@@ -18,12 +18,12 @@ const TitledGreyBox = ({ icon, title, link, children, className }: Props) => (
         <div css={tw`bg-helionix-color2 rounded-xl p-4`}>
             {typeof title === 'string' ? (
                 <p css={tw`text-sm uppercase flex items-center`}>
-                    {icon && <FontAwesomeIcon icon={icon} css={tw`mr-2 text-neutral-300`} />}
+                    {icon && <LcIcon icon={icon} css={tw`mr-2 text-neutral-300`} />}
                     {title}
                     {link && (
                         <span css={tw`ml-auto`}>
                             <a href={link} target='_blank' rel='noreferrer'>
-                                <FontAwesomeIcon icon={faExternalLinkAlt} css={tw`mr-2 text-neutral-300`} />
+                                <LcIcon icon={faExternalLinkAlt} css={tw`mr-2 text-neutral-300`} />
                             </a>
                         </span>
                     )}

@@ -146,10 +146,6 @@ Route::group([
     });
 });
 
-include 'client-serverimporter.php';
-include 'client-databaseimportexport.php';
-include 'client-versionchanger.php';
-
 /*
 |--------------------------------------------------------------------------
 | Client Control API

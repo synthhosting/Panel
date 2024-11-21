@@ -12,7 +12,7 @@ import {
 import { useStoreState } from "easy-peasy";
 import { ApplicationStore } from "@/state";
 import { ServerContext } from "@/state/server";
-import { Link, NavLink, useRouteMatch } from "react-router-dom";
+import { Link, NavLink, useRouteMatch, Route } from "react-router-dom";
 import tw, { theme } from "twin.macro";
 import styled from "styled-components/macro";
 import http from "@/api/http";
@@ -26,8 +26,7 @@ import LogoContainer from "@/components/elements/helionix/navigation/LogoContain
 import CategoryContainer from "@/components/elements/helionix/navigation/CategoryContainer";
 import NavigationButton from "@/components/elements/helionix/navigation/NavigationButton";
 import LcIcon from '@/components/elements/LcIcon';
-import { PermissionRoute } from 'some-route-library';
-import { Spinner } from 'some-spinner-library';
+import Spinner from '@/components/elements/Spinner';
 
 export default () => {
     const logo = useStoreState((state: ApplicationStore) => state.helionix.data!.logo);
@@ -158,11 +157,11 @@ export default () => {
                     )}
                 {routes.server.map(({ path, permission, component: Component, nestId }) => (
                     (!nestId || nestId === serverNestId) && (
-                        <PermissionRoute key={path} permission={permission} path={to(path)} exact>
+                        <Route key={path} path={to(path)} exact>
                             <Spinner.Suspense>
                                 <Component />
                             </Spinner.Suspense>
-                        </PermissionRoute>
+                        </Route>
                     )
                 ))}
                 {rootAdmin && (
