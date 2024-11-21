@@ -48,6 +48,7 @@ jobs:
           yarn add monaco-editor @monaco-editor/react
           yarn add sanitize-html@2.7.3 @types/sanitize-html@2.6.2
           yarn build:production
+          composer require wohali/oauth2-discord-new
           php artisan optimize:clear
           php artisan view:clear && php artisan cache:clear && php artisan route:clear && php artisan migrate --force && chown -R www-data:www-data *
 

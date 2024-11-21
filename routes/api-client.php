@@ -37,6 +37,13 @@ Route::prefix('/account')->middleware(AccountSubject::class)->group(function () 
     Route::post('/api-keys', [Client\ApiKeyController::class, 'store']);
     Route::delete('/api-keys/{identifier}', [Client\ApiKeyController::class, 'delete']);
 
+    Route::group(['prefix' => '/discord'], function () {
+        Route::get('/', [Client\DiscordConnectController::class, 'index']);
+    
+        Route::post('/auth', [Client\DiscordConnectController::class, 'generateAuthURL']);
+        Route::post('/verify', [Client\DiscordConnectController::class, 'validateAuth']);
+    });
+
     Route::prefix('/ssh-keys')->group(function () {
         Route::get('/', [Client\SSHKeyController::class, 'index']);
         Route::post('/', [Client\SSHKeyController::class, 'store']);

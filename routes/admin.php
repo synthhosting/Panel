@@ -308,3 +308,17 @@ Route::group(['prefix' => 'permissions'], function () {
     Route::post('/new', [Admin\PermissionController::class, 'create']);
     Route::post('/edit/{role:id}', [Admin\PermissionController::class, 'update']);
 });
+
+/*
+|--------------------------------------------------------------------------
+| Discord Controller Routes
+|--------------------------------------------------------------------------
+|
+| Endpoint: /admin/discord
+|
+*/
+Route::group(['prefix' => '/discord'], function () {
+    Route::get('/', [Admin\DiscordController::class, 'index'])->name('admin.discord');
+
+    Route::post('/save', [Admin\DiscordController::class, 'save'])->name('admin.discord.save');
+});

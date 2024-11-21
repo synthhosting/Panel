@@ -119,6 +119,11 @@
                                 <i class="fa fa-times"></i> <span>Permission Management</span>
                             </a>
                         </li>
+                        <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.discord') ?: 'active' }}">
+                        	<a href="{{ route('admin.discord') }}">
+                        		<i class="fa fa-wifi"></i> <span>Discord</span>
+                        	</a>
+                        </li>
                         <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.helionix.general') ?: 'active' }}">
                             <a href="{{ route('admin.helionix.general') }}">
                                 <i class="fa fa-edit"></i><span>Theme Editor</span>
