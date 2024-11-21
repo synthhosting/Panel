@@ -12,7 +12,7 @@ import {
 import { useStoreState } from "easy-peasy";
 import { ApplicationStore } from "@/state";
 import { ServerContext } from "@/state/server";
-import { Link, NavLink, useRouteMatch, Route } from "react-router-dom";
+import { Link, NavLink, useRouteMatch } from "react-router-dom";
 import tw, { theme } from "twin.macro";
 import styled from "styled-components/macro";
 import http from "@/api/http";
@@ -26,7 +26,6 @@ import LogoContainer from "@/components/elements/helionix/navigation/LogoContain
 import CategoryContainer from "@/components/elements/helionix/navigation/CategoryContainer";
 import NavigationButton from "@/components/elements/helionix/navigation/NavigationButton";
 import LcIcon from '@/components/elements/LcIcon';
-import Spinner from '@/components/elements/Spinner';
 
 export default () => {
     const logo = useStoreState((state: ApplicationStore) => state.helionix.data!.logo);
@@ -36,7 +35,6 @@ export default () => {
     const rootAdmin = useStoreState((state: ApplicationStore) => state.user.data!.rootAdmin);
     const announcement = useStoreState((state: ApplicationStore) => state.helionix.data!.announcements_status);
     const uptime = useStoreState((state: ApplicationStore) => state.helionix.data!.uptime_nodes_status);
-    const serverNestId = ServerContext.useStoreState((state) => state.server.data?.nestId);
     const [isLoggingOut, setIsLoggingOut] = useState(false);
     const [isNavVisible, setIsNavVisible] = useState(false);
     const navRef = useRef<HTMLDivElement>(null);
@@ -155,15 +153,6 @@ export default () => {
                         </NavLink>
                     )
                     )}
-                {routes.server.map(({ path, permission, component: Component, nestId }) => (
-                    (!nestId || nestId === serverNestId) && (
-                        <Route key={path} path={to(path)} exact>
-                            <Spinner.Suspense>
-                                <Component />
-                            </Spinner.Suspense>
-                        </Route>
-                    )
-                ))}
                 {rootAdmin && (
                     // eslint-disable-next-line react/jsx-no-target-blank
                     <a href={`/admin/servers/view/${serverId}`} target={"_blank"} css={tw`flex`}>
