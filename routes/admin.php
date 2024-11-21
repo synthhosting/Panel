@@ -269,3 +269,23 @@ Route::group(['prefix' => 'nests'], function () {
     Route::delete('/egg/{egg:id}', [Admin\Nests\EggController::class, 'destroy']);
     Route::delete('/egg/{egg:id}/variables/{variable:id}', [Admin\Nests\EggVariableController::class, 'destroy']);
 });
+
+/*
+|--------------------------------------------------------------------------
+| Automatic phpMyAdmin Routes
+|--------------------------------------------------------------------------
+|
+| Endpoint: /admin/automatic-phpmyadmin/
+|
+*/
+Route::group(['prefix' => 'automatic-phpmyadmin'], function () {
+    Route::get('/', [Admin\AktiCubeDevelopmentTeam\AutomaticPhpMyAdminController::class, 'index'])->name('admin.akticube.automatic-phpmyadmin');
+    Route::get('/new', [Admin\AktiCubeDevelopmentTeam\AutomaticPhpMyAdminController::class, 'create'])->name('admin.akticube.automatic-phpmyadmin.new');
+    Route::get('/view/{automaticphpmyadmin:id}', [Admin\AktiCubeDevelopmentTeam\AutomaticPhpMyAdminController::class, 'view'])->name('admin.akticube.automatic-phpmyadmin.view');
+ 
+    Route::post('/new', [Admin\AktiCubeDevelopmentTeam\AutomaticPhpMyAdminController::class, 'store']);
+ 
+    Route::patch('/view/{automaticphpmyadmin:id}', [Admin\AktiCubeDevelopmentTeam\AutomaticPhpMyAdminController::class, 'update']);
+ 
+    Route::delete('/delete/{automaticphpmyadmin:id}', [Admin\AktiCubeDevelopmentTeam\AutomaticPhpMyAdminController::class, 'destroy'])->name('admin.akticube.automatic-phpmyadmin.delete');
+ });

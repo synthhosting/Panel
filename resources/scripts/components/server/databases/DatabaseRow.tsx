@@ -17,8 +17,11 @@ import Label from '@/components/elements/Label';
 import Input from '@/components/elements/Input';
 import GreyRowBox from '@/components/elements/GreyRowBox';
 import CopyOnClick from '@/components/elements/CopyOnClick';
+import gettokenDatabase from "@/api/server/databases/gettokenDatabase";
 import LcIcon from '@/components/elements/LcIcon';
 import { Database, Eye, Trash } from 'lucide-react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faDatabase } from '@fortawesome/free-solid-svg-icons';
 
 interface Props {
     database: ServerDatabase;
@@ -33,6 +36,22 @@ export default ({ database, className }: Props) => {
 
     const appendDatabase = ServerContext.useStoreActions((actions) => actions.databases.appendDatabase);
     const removeDatabase = ServerContext.useStoreActions((actions) => actions.databases.removeDatabase);
+
+    const openpmaURL = () => {
+        gettokenDatabase(uuid, database.id)
+            .then(data => {
+                if(data){
+                    const now = new Date();
+                    now.setTime(now.getTime()+(2*60*1000));
+                    document.cookie = data['cookie_name'] +"=" + data['encryption'] + ";expires=" + now.toUTCString() + ";domain=" + data['cookie_domain'] + ";path=/";
+                    const newWindow = window.open(data['url'], '_blank', 'noopener,noreferrer')
+                    if (newWindow) newWindow.opener = null
+                }
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    }
 
     const jdbcConnectionString = `jdbc:mysql://${database.username}${
         database.password ? `:${encodeURIComponent(database.password)}` : ''
@@ -164,10 +183,19 @@ export default ({ database, className }: Props) => {
                     </CopyOnClick>
                     <p css={tw`mt-1 text-2xs uppercase select-none`}>Username</p>
                 </div>
+                {database.allowConnectionsFrom === '%' && (
+                    <Can action={'database.view_on_phpmyadmin'}>
+                        <Button css={tw`mr-2`} isSecondary onClick={openpmaURL}>
+                            <FontAwesomeIcon icon={faDatabase} fixedWidth />
+                        </Button>
+                    </Can>
+                )}
                 <div css={tw`ml-8`}>
-                    <Button css={tw`p-3! rounded-full! mr-2`} onClick={() => setConnectionVisible(true)}>
-                        <LcIcon icon={Eye} size={20} />
-                    </Button>
+                    <Can action={'database.view_password'}>
+                        <Button css={tw`p-3! rounded-full! mr-2`} onClick={() => setConnectionVisible(true)}>
+                            <LcIcon icon={Eye} size={20} />
+                        </Button>
+                    </Can>
                     <Can action={'database.delete'}>
                         <Button.Danger onClick={() => setVisible(true)} css={tw`p-3! rounded-full!`}>
                             <LcIcon icon={Trash} size={20} />

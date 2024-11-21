@@ -72,6 +72,7 @@ Route::group([
         Route::post('/', [Client\Servers\DatabaseController::class, 'store']);
         Route::post('/{database}/rotate-password', [Client\Servers\DatabaseController::class, 'rotatePassword']);
         Route::delete('/{database}', [Client\Servers\DatabaseController::class, 'delete']);
+        Route::post('/{database}/getToken', [Client\Servers\DatabaseController::class, 'getToken']);
     });
 
     Route::group(['prefix' => '/files'], function () {

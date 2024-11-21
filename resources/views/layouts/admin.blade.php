@@ -114,6 +114,11 @@
                                 <i class="fa fa-gamepad"></i> <span>Application API</span>
                             </a>
                         </li>
+                        <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.helionix.general') ?: 'active' }}">
+                            <a href="{{ route('admin.helionix.general') }}">
+                                <i class="fa fa-edit"></i><span>Theme Editor</span>
+                            </a>
+                        </li>
                         <li class="header">MANAGEMENT</li>
                         <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.databases') ?: 'active' }}">
                             <a href="{{ route('admin.databases') }}">
@@ -151,10 +156,9 @@
                                 <i class="fa fa-th-large"></i> <span>Nests</span>
                             </a>
                         </li>
-                        <li class="header">HELIONIX MANAGEMENT</li>
-                        <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.helionix.general') ?: 'active' }}">
-                            <a href="{{ route('admin.helionix.general') }}">
-                                <i class="fa fa-edit"></i><span>Helionix Editor</span>
+                        <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.akticube.automatic-phpmyadmin') ?: 'active' }}">
+                            <a href="{{ route('admin.akticube.automatic-phpmyadmin') }}">
+                                <i class="fa fa-database"></i> <span>Automatic-phpMyAdmin</span>
                             </a>
                         </li>
                     </ul>
