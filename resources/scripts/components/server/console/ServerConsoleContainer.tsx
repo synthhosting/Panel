@@ -13,6 +13,14 @@ import StatGraphs from '@/components/server/console/StatGraphs';
 import PowerButtons from '@/components/server/console/PowerButtons';
 import ServerDetailsBlock from '@/components/server/console/ServerDetailsBlock';
 import { Alert } from '@/components/elements/alert';
+import useSWR from 'swr';
+import getDowntime from '@/api/server/getDowntime';
+
+export interface DowntimeResponse {
+    has_downtime: boolean;
+    start: Date;
+    end: Date;
+}
 
 export type PowerAction = 'start' | 'stop' | 'restart' | 'kill';
 
@@ -24,6 +32,11 @@ const ServerConsoleContainer = () => {
     const isTransferring = ServerContext.useStoreState((state) => state.server.data!.isTransferring);
     const eggFeatures = ServerContext.useStoreState((state) => state.server.data!.eggFeatures, isEqual);
     const isNodeUnderMaintenance = ServerContext.useStoreState((state) => state.server.data!.isNodeUnderMaintenance);
+    const uuid = ServerContext.useStoreState(state => state.server.data!.uuid);
+
+    const { data } = useSWR<DowntimeResponse>([ uuid, '/downtime' ], key => getDowntime(key), {
+        revalidateOnFocus: false,
+    });
 
     return (
     layout == 1 ?
@@ -93,6 +106,12 @@ const ServerConsoleContainer = () => {
                         : isInstalling
                         ? 'This server is currently running its installation process and most actions are unavailable.'
                         : 'This server is currently being transferred to another node and all actions are unavailable.'}
+                </Alert>
+            )}
+            {data?.has_downtime && (
+                <Alert type={'warning'} className={'mb-4'}>
+                    The node this server is located on has downtime on {data.start} lasting until&nbsp;
+                    {data.end ? data.end : 'unknown'}.
                 </Alert>
             )}
             <div className={'grid grid-cols-4 gap-4 mb-4'}>

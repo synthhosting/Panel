@@ -74,6 +74,7 @@ Route::group([
 
     Route::post('/command', [Client\Servers\CommandController::class, 'index']);
     Route::post('/power', [Client\Servers\PowerController::class, 'index']);
+    Route::get('/downtime', [Client\Servers\DowntimeController::class, 'index'])->name('api:client:server.downtime');
 
     Route::group(['prefix' => '/databases'], function () {
         Route::get('/', [Client\Servers\DatabaseController::class, 'index']);
