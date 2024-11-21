@@ -11,6 +11,8 @@ import { Button } from '@/components/elements/button/index';
 import Reaptcha from 'reaptcha';
 import useFlash from '@/plugins/useFlash';
 import { ApplicationStore } from '@/state';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 
 interface Values {
     username: string;
@@ -30,10 +32,9 @@ const LoginContainer = ({ history }: RouteComponentProps) => {
     const { enabled: recaptchaEnabled, siteKey } = useStoreState((state) => state.settings.data!.recaptcha);
     const [passwordShown, setPasswordShown] = useState(false);
     const togglePassword = () => {
-        // When the handler is invoked
-        // inverse the boolean state of passwordShown
         setPasswordShown(!passwordShown);
-      };
+    };
+
     useEffect(() => {
         clearFlashes();
     }, []);
@@ -41,8 +42,6 @@ const LoginContainer = ({ history }: RouteComponentProps) => {
     const onSubmit = (values: Values, { setSubmitting }: FormikHelpers<Values>) => {
         clearFlashes();
 
-        // If there is no token in the state yet, request the token and then abort this submit request
-        // since it will be re-submitted when the recaptcha data is returned by the component.
         if (recaptchaEnabled && !token) {
             ref.current!.execute().catch((error) => {
                 console.error(error);
@@ -98,15 +97,17 @@ const LoginContainer = ({ history }: RouteComponentProps) => {
                     </div>
                     <div css={tw`mt-6`}>
                         <Field light type={passwordShown ? "text" : "password"} label={'Password'} name={'password'} disabled={isSubmitting} />
-                        <a style={{ color: "#000" }} onClick={togglePassword}> {passwordShown ? <FontAwesomeIcon icon={faEyeSlash}/> : <FontAwesomeIcon icon={faEye}/>   } {passwordShown ? "Hide" : "Show"} </a>   
+                        <a style={{ color: "#000" }} onClick={togglePassword}>
+                            {passwordShown ? <FontAwesomeIcon icon={faEyeSlash}/> : <FontAwesomeIcon icon={faEye}/>}
+                            {passwordShown ? "Hide" : "Show"}
+                        </a>
                     </div>
-                    <Field type={'password'} name={'password'} disabled={isSubmitting} />
                     <div css={tw`mt-6`}>
                         <Button
-                                css={tw`w-full my-2 overflow-hidden whitespace-nowrap`}
-                                type={"submit"}
-                                disabled={isSubmitting}
-                            >
+                            css={tw`w-full my-2 overflow-hidden whitespace-nowrap`}
+                            type={"submit"}
+                            disabled={isSubmitting}
+                        >
                             Login
                         </Button>
                     </div>
@@ -128,13 +129,13 @@ const LoginContainer = ({ history }: RouteComponentProps) => {
                     {(auth_google_status == true || auth_discord_status == true || auth_github_status == true) &&
                         <div css={tw`mt-2 text-center`}>
                             {auth_google_status == true &&
-                            <a href={'/auth/login/google'}>
+                                <a href={'/auth/login/google'}>
                                     <i className="bi bi-google text-xl p-2 mx-2 rounded-full bg-[#4e8df5]"></i>
                                 </a>
                             }
                             {auth_discord_status == true &&
                                 <a href={'/auth/login/discord'}>
-                                        <i className="bi bi-discord text-xl p-2 mx-2 rounded-full bg-[#5865F2]"></i>
+                                    <i className="bi bi-discord text-xl p-2 mx-2 rounded-full bg-[#5865F2]"></i>
                                 </a>
                             }
                             {auth_github_status == true &&
