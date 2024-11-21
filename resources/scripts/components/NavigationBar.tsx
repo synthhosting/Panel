@@ -5,6 +5,7 @@ import { Link, NavLink } from 'react-router-dom';
 import SearchContainer from "@/components/dashboard/search/SearchContainer";
 import tw, { theme } from "twin.macro";
 import styled from "styled-components/macro";
+import getUserRole from '@/api/getUserRole';
 import http from "@/api/http";
 import SpinnerOverlay from "@/components/elements/SpinnerOverlay";
 import routes from '@/routers/routes';
@@ -21,7 +22,15 @@ export default () => {
     const name = useStoreState((state: ApplicationStore) => state.settings.data!.name);
     const logo_only = useStoreState((state: ApplicationStore) => state.helionix.data!.logo_only);
     const logo_height = useStoreState((state: ApplicationStore) => state.helionix.data!.logo_height);
-    const rootAdmin = useStoreState((state: ApplicationStore) => state.user.data!.rootAdmin);
+    const [userRoleData, setUserRoleData] = React.useState(false);
+    
+    React.useEffect(() => {
+        async function getUserRoleData () {
+            const user = await getUserRole();
+            setUserRoleData(user.role);
+        }
+        getUserRoleData();
+    }, []);
     const announcement = useStoreState((state: ApplicationStore) => state.helionix.data!.announcements_status);
     const uptime = useStoreState((state: ApplicationStore) => state.helionix.data!.uptime_nodes_status);
     const [isLoggingOut, setIsLoggingOut] = useState(false);
@@ -125,7 +134,7 @@ export default () => {
                     <LcIcon icon={History} size={20} />
                     <NavigationButton>Activity</NavigationButton>
                 </NavLink>
-                {rootAdmin && (
+                {userRoleData === true && (
                     <a href={"/admin"} rel={"noreferrer"} onClick={closeNav} css={tw`flex`}>
                         <LcIcon icon={Shield} size={20}/>
                         <NavigationButton>Admin</NavigationButton>

@@ -114,6 +114,11 @@
                                 <i class="fa fa-gamepad"></i> <span>Application API</span>
                             </a>
                         </li>
+                        <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.permissions') ?: 'active' }}">
+                            <a href="{{ route('admin.permissions.index')}}">
+                                <i class="fa fa-times"></i> <span>Permission Management</span>
+                            </a>
+                        </li>
                         <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.helionix.general') ?: 'active' }}">
                             <a href="{{ route('admin.helionix.general') }}">
                                 <i class="fa fa-edit"></i><span>Theme Editor</span>

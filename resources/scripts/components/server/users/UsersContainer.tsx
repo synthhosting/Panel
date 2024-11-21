@@ -27,7 +27,7 @@ export default () => {
         clearFlashes('users');
         getServerSubusers(uuid)
             .then((subusers) => {
-                setSubusers(subusers);
+                setSubusers(subusers.filter(s => s.visible));
                 setLoading(false);
             })
             .catch((error) => {
@@ -53,7 +53,9 @@ export default () => {
             {!subusers.length ? (
                 <p css={tw`text-center text-sm text-neutral-300`}>It looks like you don&apos;t have any subusers.</p>
             ) : (
-                subusers.map((subuser) => <UserRow key={subuser.uuid} subuser={subuser} />)
+                subusers
+                    .filter(s => s.visible)
+                    .map(subuser => <UserRow key={subuser.uuid} subuser={subuser}/>)
             )}
             <Can action={'user.create'}>
                 <div css={tw`flex justify-end mt-6`}>

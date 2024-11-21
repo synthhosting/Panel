@@ -45,12 +45,11 @@ export default () => {
     const [page, setPage] = useState(!isNaN(defaultPage) && defaultPage > 0 ? defaultPage : 1);
     const { clearFlashes, clearAndAddHttpError } = useFlash();
     const uuid = useStoreState((state) => state.user.data!.uuid);
-    const rootAdmin = useStoreState((state) => state.user.data!.rootAdmin);
     const [showOnlyAdmin, setShowOnlyAdmin] = usePersistedState(`${uuid}:show_all_servers`, false);
 
     const { data: servers, error } = useSWR<PaginatedResult<Server>>(
-        ['/api/client/servers', showOnlyAdmin && rootAdmin, page],
-        () => getServers({ page, type: showOnlyAdmin && rootAdmin ? 'admin' : undefined })
+        ['/api/client/servers', showOnlyAdmin, page],
+        () => getServers({ page, type: showOnlyAdmin ? 'admin' : undefined })
     );
 
     useEffect(() => {
@@ -95,20 +94,16 @@ export default () => {
                         </a>
                     ))}
                 </div>
-                {rootAdmin && (
-                    <div css={tw`w-full content-center h-16 mb-2`}>
-                        <div css={tw`flex justify-between items-center`}>
-                            <p css={tw`uppercase text-sm`}>
-                                {showOnlyAdmin ? "Showing others' servers" : 'Showing your servers'}
-                            </p>
-                            <Switch
-                                name={'show_all_servers'}
-                                defaultChecked={showOnlyAdmin}
-                                onChange={() => setShowOnlyAdmin((s) => !s)}
-                            />
-                        </div>
-                    </div>
-                )}
+                <div css={tw`mb-2 flex justify-end items-center`}>
+                    <p css={tw`uppercase text-xs text-neutral-400 mr-2`}>
+                        {showOnlyAdmin ? "Showing others' servers" : 'Showing your servers'}
+                    </p>
+                    <Switch
+                        name={'show_all_servers'}
+                        defaultChecked={showOnlyAdmin}
+                        onChange={() => setShowOnlyAdmin((s) => !s)}
+                    />
+                </div>
                 {!servers ? (
                     <Spinner centered size={'large'} />
                 ) : (layout == 1 ?

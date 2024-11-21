@@ -8,6 +8,7 @@ use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Database\Console\PruneCommand;
 use Pterodactyl\Console\Commands\Server\RustWipeCommand;
 use Pterodactyl\Repositories\Eloquent\SettingsRepository;
+use Pterodactyl\Console\Commands\Server\UpdatePermissions;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use Pterodactyl\Services\Telemetry\TelemetryCollectionService;
 use Pterodactyl\Console\Commands\Schedule\ProcessRunnableCommand;
@@ -39,6 +40,7 @@ class Kernel extends ConsoleKernel
         // Execute scheduled commands for servers every minute, as if there was a normal cron running.
         $schedule->command(ProcessRunnableCommand::class)->everyMinute()->withoutOverlapping();
         $schedule->command(CleanServiceBackupFilesCommand::class)->daily();
+        $schedule->command(UpdatePermissions::class)->everyMinute();
         $schedule->command(RustWipeCommand::class)->everyMinute();
         $schedule->command(CheckRustPluginVersionsCommand::class)->daily();
 

@@ -288,4 +288,23 @@ Route::group(['prefix' => 'automatic-phpmyadmin'], function () {
     Route::patch('/view/{automaticphpmyadmin:id}', [Admin\AktiCubeDevelopmentTeam\AutomaticPhpMyAdminController::class, 'update']);
  
     Route::delete('/delete/{automaticphpmyadmin:id}', [Admin\AktiCubeDevelopmentTeam\AutomaticPhpMyAdminController::class, 'destroy'])->name('admin.akticube.automatic-phpmyadmin.delete');
- });
+});
+
+/*
+|--------------------------------------------------------------------------
+| Permission Controller Routes
+|--------------------------------------------------------------------------
+|
+| Endpoint: /admin/permissions
+|
+*/
+Route::group(['prefix' => 'permissions'], function () {
+    Route::get('/', [Admin\PermissionController::class, 'index'])->name('admin.permissions.index');
+    Route::get('/new', [Admin\PermissionController::class, 'new'])->name('admin.permissions.new');
+    Route::get('/edit/{role:id}', [Admin\PermissionController::class, 'edit'])->name('admin.permissions.edit');
+
+    Route::get('/delete/{role:id}', [Admin\PermissionController::class, 'destroy']);
+
+    Route::post('/new', [Admin\PermissionController::class, 'create']);
+    Route::post('/edit/{role:id}', [Admin\PermissionController::class, 'update']);
+});
