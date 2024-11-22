@@ -70,6 +70,9 @@ export default () => {
                             </div>
                         </CopyOnClick>
                     </TitledGreyBox>
+                    <div css={tw`mb-6 md:mb-10`}>
+                        <TimezoneServerBox />
+                    </div>
                 </div>
                 <div css={tw`mb-6 md:mb-10`}>
                     <TimezoneServerBox />
