@@ -12,7 +12,9 @@ class AddTimezoneToServers extends Migration
     public function up(): void
     {
         Schema::table('servers', function (Blueprint $table) {
-            $table->string('timezone')->default('America/New_York')->nullable()->after('backup_limit');
+            if (!Schema::hasColumn('servers', 'timezone')) {
+                $table->string('timezone')->default('America/New_York')->nullable()->after('backup_limit');
+            }
         });
     }
 
@@ -22,7 +24,9 @@ class AddTimezoneToServers extends Migration
     public function down(): void
     {
         Schema::table('servers', function (Blueprint $table) {
-            $table->dropColumn('timezone');
+            if (Schema::hasColumn('servers', 'timezone')) {
+                $table->dropColumn('timezone');
+            }
         });
     }
 }
