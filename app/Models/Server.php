@@ -132,6 +132,7 @@ class Server extends Model
         'status' => self::STATUS_INSTALLING,
         'oom_disabled' => true,
         'installed_at' => null,
+        'timezone' => 'America/New_York',
     ];
 
     /**
@@ -168,6 +169,7 @@ class Server extends Model
         'database_limit' => 'present|nullable|integer|min:0',
         'allocation_limit' => 'sometimes|nullable|integer|min:0',
         'backup_limit' => 'present|nullable|integer|min:0',
+        'timezone' => 'nullable|string',
     ];
 
     /**
@@ -193,6 +195,7 @@ class Server extends Model
         self::UPDATED_AT => 'datetime',
         'deleted_at' => 'datetime',
         'installed_at' => 'datetime',
+        'timezone' => 'string',
     ];
 
     /**

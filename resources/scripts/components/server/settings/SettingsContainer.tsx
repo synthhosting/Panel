@@ -14,6 +14,7 @@ import isEqual from 'react-fast-compare';
 import CopyOnClick from '@/components/elements/CopyOnClick';
 import { ip } from '@/lib/formatters';
 import { Button } from '@/components/elements/button/index';
+import TimezoneServerBox from '@/components/server/settings/TimezoneServerBox';
 
 export default () => {
     const username = useStoreState((state) => state.user.data!.username);
@@ -69,6 +70,9 @@ export default () => {
                             </div>
                         </CopyOnClick>
                     </TitledGreyBox>
+                </div>
+                <div css={tw`mb-6 md:mb-10`}>
+                    <TimezoneServerBox />
                 </div>
                 <div css={tw`w-full mt-6 md:flex-1 md:mt-0`}>
                     <Can action={'settings.rename'}>
