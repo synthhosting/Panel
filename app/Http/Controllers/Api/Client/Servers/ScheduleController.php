@@ -69,7 +69,7 @@ class ScheduleController extends ClientApiController
             'cron_day_of_week' => $request->input('day_of_week'),
             'cron_month' => $request->input('month'),
             'cron_day_of_month' => $request->input('day_of_month'),
-            'cron_hour' => (string) $cronHour
+            'cron_hour' => (string) $cronHour,
             'cron_minute' => $request->input('minute'),
             'is_active' => (bool) $request->input('is_active'),
             'only_when_online' => (bool) $request->input('only_when_online'),
