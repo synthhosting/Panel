@@ -166,6 +166,11 @@
                                 <i class="fa fa-th-large"></i> <span>Nests</span>
                             </a>
                         </li>
+                        <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.veltastudios.schedule-templates') ?: 'active' }}">
+                            <a href="{{ route('admin.veltastudios.schedule-templates') }}">
+                                <i class="fa fa-calendar"></i> <span>Schedule Template Manager</span>
+                            </a>
+                        </li>
                         <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.akticube.automatic-phpmyadmin') ?: 'active' }}">
                             <a href="{{ route('admin.akticube.automatic-phpmyadmin') }}">
                                 <i class="fa fa-database"></i> <span>Automatic-phpMyAdmin</span>

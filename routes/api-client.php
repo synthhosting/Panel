@@ -103,6 +103,7 @@ Route::group([
     Route::group(['prefix' => '/schedules'], function () {
         Route::get('/', [Client\Servers\ScheduleController::class, 'index']);
         Route::post('/', [Client\Servers\ScheduleController::class, 'store']);
+        Route::get('/templates', [Client\Servers\ScheduleTemplateController::class, 'index']);
         Route::get('/{schedule}', [Client\Servers\ScheduleController::class, 'view']);
         Route::post('/{schedule}', [Client\Servers\ScheduleController::class, 'update']);
         Route::post('/{schedule}/execute', [Client\Servers\ScheduleController::class, 'execute']);
