@@ -160,7 +160,7 @@ export default {
         {
             path: '/plugins',
             permission: 'file.*',
-            nestId: 1,
+            eggIds: [1, 3],
             name: 'Plugin Manager',
             icon: CirclePlay,
             component: PluginManagerContainer,
@@ -170,6 +170,7 @@ export default {
             permissions: 'file.*',
             name: 'Mod Installer',
             icon: CirclePlay,
+            eggIds: [1, 3],
             component: ModManagerContainer,
         },
         {
