@@ -142,8 +142,8 @@ export default () => {
                     route.permission ? (
                         (!route.nestId || route.nestId === serverNestId) &&
                         (!route.eggId || route.eggId === serverEggId) &&
-                        (!route.nestIds || route.nestIds.includes(serverNestId)) &&
-                        (!route.eggIds || route.eggIds.includes(serverEggId)) && (
+                        (!route.nestIds || (serverNestId !== undefined && route.nestIds.includes(serverNestId))) &&
+                        (!route.eggIds || (serverEggId !== undefined && route.eggIds.includes(serverEggId))) && (
                             <Can key={route.path} action={route.permission} matchAny>
                                 <NavLink to={to(route.path, true)} exact={route.exact} css={tw`flex items-center`}>
                                     <LcIcon icon={route.icon} size={20}/>
@@ -154,8 +154,8 @@ export default () => {
                     ) : (
                         (!route.nestId || route.nestId === serverNestId) &&
                         (!route.eggId || route.eggId === serverEggId) &&
-                        (!route.nestIds || route.nestIds.includes(serverNestId)) &&
-                        (!route.eggIds || route.eggIds.includes(serverEggId)) && (
+                        (!route.nestIds || (serverNestId !== undefined && route.nestIds.includes(serverNestId))) &&
+                        (!route.eggIds || (serverEggId !== undefined && route.eggIds.includes(serverEggId))) && (
                             <NavLink key={route.path} to={to(route.path, true)} exact={route.exact} css={tw`flex items-center`}>
                                 <LcIcon icon={route.icon} size={20} />
                                 <NavigationButton>{route.name}</NavigationButton>
