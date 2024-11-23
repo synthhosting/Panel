@@ -17,6 +17,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property array<string, string> $docker_images
  * @property string $update_url
  * @property bool $force_outgoing_ip
+ * @property string $denyfiles
+ * @property bool $hidefiles
  * @property array|null $file_denylist
  * @property string|null $config_files
  * @property string|null $config_startup
@@ -98,6 +100,8 @@ class Egg extends Model
         'script_entry',
         'script_container',
         'copy_script_from',
+        'denyfiles',
+        'hidefiles',
     ];
 
     /**
@@ -108,6 +112,7 @@ class Egg extends Model
         'config_from' => 'integer',
         'script_is_privileged' => 'boolean',
         'force_outgoing_ip' => 'boolean',
+        'hidefiles' => 'boolean',
         'copy_script_from' => 'integer',
         'features' => 'array',
         'docker_images' => 'array',
@@ -134,6 +139,8 @@ class Egg extends Model
         'config_files' => 'required_without:config_from|nullable|json',
         'update_url' => 'sometimes|nullable|string',
         'force_outgoing_ip' => 'sometimes|boolean',
+        'denyfiles' => 'sometimes|string',
+        'hidefiles' => 'sometimes|boolean',
     ];
 
     protected $attributes = [

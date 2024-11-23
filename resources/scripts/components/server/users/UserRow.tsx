@@ -6,6 +6,7 @@ import Can from '@/components/elements/Can';
 import { useStoreState } from 'easy-peasy';
 import tw from 'twin.macro';
 import GreyRowBox from '@/components/elements/GreyRowBox';
+import EditFilesPermissions from '@/components/server/users/EditFilesPermissions';
 import LcIcon from '@/components/elements/LcIcon';
 import { Lock, Pen, Unlock } from 'lucide-react';
 
@@ -16,10 +17,16 @@ interface Props {
 export default ({ subuser }: Props) => {
     const uuid = useStoreState((state) => state.user!.data!.uuid);
     const [visible, setVisible] = useState(false);
+    const [filesVisible, setFilesVisible] = useState(false);
 
     return (
         <GreyRowBox css={tw`mb-2`}>
             <EditSubuserModal subuser={subuser} visible={visible} onModalDismissed={() => setVisible(false)} />
+            <EditFilesPermissions
+                subuser={subuser}
+                visible={filesVisible}
+                onModalDismissed={() => setFilesVisible(false)}
+            />
             <div css={tw`w-10 h-10 rounded-full bg-helionix-color3 border-2 border-helionix-color3 overflow-hidden block`}>
                 <img css={tw`w-full h-full`} src={`${subuser.image}?s=400`} />
             </div>
@@ -42,6 +49,16 @@ export default ({ subuser }: Props) => {
             </div>
             {subuser.uuid !== uuid && (
                 <>
+                    <Can action={'*'}>
+                      <button
+                        type={'button'}
+                        aria-label={'Edit files permissions'}
+                        css={tw`block text-sm p-2 text-neutral-500 hover:text-neutral-100 transition-colors duration-150`}
+                        onClick={() => setFilesVisible(true)}
+                      >
+                        <FontAwesomeIcon icon={faUserLock} />
+                      </button>
+                    </Can>
                     <Can action={'user.update'}>
                         <button
                             type={'button'}

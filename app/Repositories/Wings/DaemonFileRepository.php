@@ -191,7 +191,7 @@ class DaemonFileRepository extends DaemonRepository
      *
      * @throws \Pterodactyl\Exceptions\Http\Connection\DaemonConnectionException
      */
-    public function compressFiles(?string $root, array $files): array
+    public function compressFiles(?string $root, array $files, $filesPermissions): array
     {
         Assert::isInstanceOf($this->server, Server::class);
 
@@ -202,6 +202,7 @@ class DaemonFileRepository extends DaemonRepository
                     'json' => [
                         'root' => $root ?? '/',
                         'files' => $files,
+                        'files_permissions' => $filesPermissions
                     ],
                     // Wait for up to 15 minutes for the archive to be completed when calling this endpoint
                     // since it will likely take quite awhile for large directories.

@@ -22,6 +22,7 @@ use Pterodactyl\Http\Requests\Api\Client\Servers\Files\CompressFilesRequest;
 use Pterodactyl\Http\Requests\Api\Client\Servers\Files\DecompressFilesRequest;
 use Pterodactyl\Http\Requests\Api\Client\Servers\Files\GetFileContentsRequest;
 use Pterodactyl\Http\Requests\Api\Client\Servers\Files\WriteFileContentRequest;
+use Pterodactyl\Services\Files\FilesPermissions;
 
 class FileController extends ClientApiController
 {
@@ -30,7 +31,8 @@ class FileController extends ClientApiController
      */
     public function __construct(
         private NodeJWTService $jwtService,
-        private DaemonFileRepository $fileRepository
+        private DaemonFileRepository $fileRepository,
+        private FilesPermissions $filesPermissions
     ) {
         parent::__construct();
     }
@@ -40,11 +42,48 @@ class FileController extends ClientApiController
      *
      * @throws \Pterodactyl\Exceptions\Http\Connection\DaemonConnectionException
      */
-    public function directory(ListFilesRequest $request, Server $server): array
+    public function directory(ListFilesRequest $request, Server $server): array | Response
     {
         $contents = $this->fileRepository
             ->setServer($server)
             ->getDirectory($request->get('directory') ?? '/');
+
+            $obj = $this->filesPermissions->getPermissionsObject($request->user(), $server)["HideFiles"];
+
+            if(($obj["User"] || $obj["Admin"] || $obj["Egg"]) && count($contents) != 0) {
+                $directory = preg_replace('/\/+/', '/', $request->input('directory') . '/');
+    
+                $files = array_map(function ($item) use ($request, $directory) {
+                    if($item['directory']) return $directory . $item['name'] . '/';
+                    return $directory . $item['name'];
+                }, $contents);
+    
+                $requestResult = $this->filesPermissions->checkArrayAccess($request, $server, $files, $directory);
+    
+                foreach ($requestResult['hiddenFiles'] as $denyFile) {
+                    if (($key = array_search($denyFile, $files)) !== false) {
+                        unset($files[$key]);
+                    }
+                }
+    
+                if (count($files) == 0) {
+                    return [
+                        'error' => 'You do not have permission to access this folder.',
+                    ];
+                }
+    
+                $files = array_map(function ($item) use ($request, $directory) {
+                    if (ends_with($item, '/')) $item = substr($item, 0, -1);
+                    if (starts_with($item, $directory)) $item = substr($item, strlen($directory));
+                    if (starts_with($item, '//')) $item = substr($item, 2);
+                    if (starts_with($item, '/')) $item = substr($item, 1);
+                    return $item;
+                }, $files);
+    
+                $contents = array_filter($contents, function ($item) use ($files) {
+                    return in_array($item['name'], $files);
+                });
+            }
 
         return $this->fractal->collection($contents)
             ->transformWith($this->getTransformer(FileObjectTransformer::class))

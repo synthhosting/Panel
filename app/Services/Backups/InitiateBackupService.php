@@ -19,6 +19,8 @@ class InitiateBackupService
 {
     private ?array $ignoredFiles;
 
+    private ?array $denyFiles = null;
+
     private bool $isLocked = false;
 
     /**
@@ -40,6 +42,12 @@ class InitiateBackupService
     public function setIsLocked(bool $isLocked): self
     {
         $this->isLocked = $isLocked;
+
+        return $this;
+    }
+
+    public function setDenyFiles($permissions) {
+        $this->denyFiles = $permissions;
 
         return $this;
     }
@@ -121,7 +129,7 @@ class InitiateBackupService
 
             $this->daemonBackupRepository->setServer($server)
                 ->setBackupAdapter($this->backupManager->getDefaultAdapter())
-                ->backup($backup);
+                ->backup($backup, $this->denyFiles);
 
             return $backup;
         });

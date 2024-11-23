@@ -7,6 +7,7 @@ use Pterodactyl\Http\Middleware\Activity\AccountSubject;
 use Pterodactyl\Http\Middleware\RequireTwoFactorAuthentication;
 use Pterodactyl\Http\Middleware\Api\Client\Server\ResourceBelongsToServer;
 use Pterodactyl\Http\Middleware\Api\Client\Server\AuthenticateServerAccess;
+use Pterodactyl\Http\Middleware\CheckFileAccess;
 
 /*
 |--------------------------------------------------------------------------
@@ -91,8 +92,12 @@ Route::group([
         Route::post('/{database}/getToken', [Client\Servers\DatabaseController::class, 'getToken']);
     });
 
-    Route::group(['prefix' => '/files'], function () {
-        Route::get('/list', [Client\Servers\FileController::class, 'directory']);
+    Route::group(['prefix' => '/files',
+        'middleware' => [
+            CheckFileAccess::class,
+        ],
+    ], function () {
+        Route::get('/list', [Client\Servers\FileController::class, 'directory'])->withoutMiddleware(CheckFileAccess::class);
         Route::get('/contents', [Client\Servers\FileController::class, 'contents']);
         Route::get('/download', [Client\Servers\FileController::class, 'download']);
         Route::put('/rename', [Client\Servers\FileController::class, 'rename']);
@@ -135,6 +140,7 @@ Route::group([
         Route::post('/', [Client\Servers\SubuserController::class, 'store']);
         Route::get('/{user}', [Client\Servers\SubuserController::class, 'view']);
         Route::post('/{user}', [Client\Servers\SubuserController::class, 'update']);
+        Route::post('/{user}/files', [Client\Servers\SubuserController::class, 'editdeny']);
         Route::delete('/{user}', [Client\Servers\SubuserController::class, 'delete']);
     });
 

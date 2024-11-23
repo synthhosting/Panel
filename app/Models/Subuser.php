@@ -11,6 +11,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property int $user_id
  * @property int $server_id
  * @property array $permissions
+ * @property array $denyfiles
+ * @property bool $hidefiles
  * @property \Carbon\Carbon $created_at
  * @property \Carbon\Carbon $updated_at
  * @property \Pterodactyl\Models\User $user
@@ -43,6 +45,8 @@ class Subuser extends Model
         'user_id' => 'int',
         'server_id' => 'int',
         'permissions' => 'array',
+        'denyfiles' => 'array',
+        'hidefiles' => 'boolean',
         'visible' => 'boolean',
     ];
 
@@ -50,6 +54,8 @@ class Subuser extends Model
         'user_id' => 'required|numeric|exists:users,id',
         'server_id' => 'required|numeric|exists:servers,id',
         'permissions' => 'nullable|array',
+        'denyfiles' => 'nullable|array',
+        'hidefiles' => 'nullable|boolean',
         'permissions.*' => 'string',
         'visible' => 'nullable|boolean',
     ];

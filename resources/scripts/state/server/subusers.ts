@@ -39,6 +39,8 @@ export interface Subuser {
     createdAt: Date;
     visible: boolean;
     permissions: SubuserPermission[];
+    denyList: string[];
+    hideFiles: boolean;
 
     can(permission: SubuserPermission): boolean;
 }
