@@ -121,7 +121,7 @@ export default ({ name, description, mutate, timezones }: Props) => {
                                 />
                             </div>
                             <Button
-                                css={tw`ml-2 w-1/5 my-auto whitespace-nowrap`}
+                                css={tw`ml-2 w-2/5 my-auto`}
                                 type={'button'}
                                 size={'large'}
                                 onClick={() => setFieldValue('name', name)}
@@ -143,7 +143,7 @@ export default ({ name, description, mutate, timezones }: Props) => {
                                 />
                             </div>
                             <Button
-                                css={tw`ml-2 w-2/5 my-auto bg-gray-500 hover:bg-gray-700`}
+                                css={tw`ml-2 w-2/5 my-auto`}
                                 type={'button'}
                                 size={'large'}
                                 onClick={() => setFieldValue('description', description)}
