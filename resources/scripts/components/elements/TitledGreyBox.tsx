@@ -15,10 +15,10 @@ interface Props {
 }
 
 const TitledGreyBox = ({ icon, title, link, children, className }: Props) => (
-    <div css={tw`rounded-xl shadow-md bg-helionix-color-label`} className={className}>
-        <div css={tw`bg-helionix-colorlabel rounded-xl p-4`}>
+    <div css={tw`rounded-xl shadow-md bg-helionix-color2`} className={className}>
+        <div css={tw`bg-helionix-color2 rounded-xl p-4`}>
             {typeof title === 'string' ? (
-                <p css={tw`text-sm uppercase flex items-center`}>
+                <p css={tw`text-sm uppercase flex items-center text-white`}>
                     {icon && <LcIcon icon={icon} css={tw`mr-2 text-neutral-300`} />}
                     {title}
                     {link && (
@@ -30,10 +30,10 @@ const TitledGreyBox = ({ icon, title, link, children, className }: Props) => (
                     )}
                 </p>
             ) : (
-                title
+                <span css={tw`text-white`}>{title}</span>
             )}
         </div>
-        <div css={tw`p-4`}>{children}</div>
+        <div css={tw`p-4 text-white`}>{children}</div>
     </div>
 );
 
