@@ -158,7 +158,7 @@ export default {
             component: StartupContainer,
         },
         {
-            path: '/plugins',
+            path: '/mcplugins',
             permission: 'file.*',
             nestId: 1,
             name: 'Plugin Manager',
