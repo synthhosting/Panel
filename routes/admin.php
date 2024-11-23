@@ -359,3 +359,54 @@ Route::group(['prefix' => 'players'], function () {
 
     Route::delete('/delete', [Admin\PlayerCounterController::class, 'delete'])->name('admin.players.delete');
 });
+
+/*
+|--------------------------------------------------------------------------
+| Node Backup Routes
+|--------------------------------------------------------------------------
+|
+| Endpoint: /admin/node-backup/
+|
+*/
+Route::group(['prefix' => 'node-backup'], function() {
+    Route::get('/', [Admin\AktiCubeDevelopmentTeam\NodeBackupController::class, 'index'])->name('admin.akticube.node-backup');
+    Route::get('/statistics', [Admin\AktiCubeDevelopmentTeam\NodeBackupController::class, 'statistics'])->name('admin.akticube.node-backup.statistics');
+    Route::group(['prefix' => 'group'], function() {
+        Route::get('/new', [Admin\AktiCubeDevelopmentTeam\NodeBackupController::class, 'createNodeBackupGroup'])->name('admin.akticube.node-backup.group.new');
+        Route::post('/new', [Admin\AktiCubeDevelopmentTeam\NodeBackupController::class, 'storeNodeBackupGroup'])->name('admin.akticube.node-backup.group.store');
+        Route::group(['prefix' => '{nodeBackupGroupId}'], function() {
+            Route::get('/', [Admin\AktiCubeDevelopmentTeam\NodeBackupController::class, 'viewNodeBackupGroup'])->name('admin.akticube.node-backup.group.view');
+            Route::get('/edit', [Admin\AktiCubeDevelopmentTeam\NodeBackupController::class, 'editNodeBackupGroup'])->name('admin.akticube.node-backup.group.edit');
+            Route::patch('/edit', [Admin\AktiCubeDevelopmentTeam\NodeBackupController::class, 'updateNodeBackupGroup'])->name('admin.akticube.node-backup.group.update');
+            Route::delete('/delete', [Admin\AktiCubeDevelopmentTeam\NodeBackupController::class, 'destroyNodeBackupGroup'])->name('admin.akticube.node-backup.group.delete');
+            Route::group(['prefix' => 'backup'], function() {
+                Route::get('/new', [Admin\AktiCubeDevelopmentTeam\NodeBackupController::class, 'createNodeBackup'])->name('admin.akticube.node-backup.group.backup.new');
+                Route::post('/new', [Admin\AktiCubeDevelopmentTeam\NodeBackupController::class, 'storeNodeBackup'])->name('admin.akticube.node-backup.group.backup.store');
+                Route::group(['prefix' => '{nodeBackupId}'], function() {
+                    Route::get('/', [Admin\AktiCubeDevelopmentTeam\NodeBackupController::class, 'viewNodeBackup'])->name('admin.akticube.node-backup.group.backup.view');
+                    Route::get('/restore', [Admin\AktiCubeDevelopmentTeam\NodeBackupController::class, 'restoreNodeBackup'])->name('admin.akticube.node-backup.group.backup.restore');
+                    Route::get('/restore-on-another-node/{nodeId}', [Admin\AktiCubeDevelopmentTeam\NodeBackupController::class, 'restoreNodeBackupOnAnotherNode'])->name('admin.akticube.node-backup.group.backup.restore-on-another-node');
+                    Route::get('/stop', [Admin\AktiCubeDevelopmentTeam\NodeBackupController::class, 'stopNodeBackup'])->name('admin.akticube.node-backup.group.backup.stop');
+                    Route::get('/try-again', [Admin\AktiCubeDevelopmentTeam\NodeBackupController::class, 'tryAgainNodeBackup'])->name('admin.akticube.node-backup.group.backup.try-again');
+                    Route::delete('/delete', [Admin\AktiCubeDevelopmentTeam\NodeBackupController::class, 'destroyNodeBackup'])->name('admin.akticube.node-backup.group.backup.delete');
+                    Route::group(['prefix' => '/server-backup/{nodeBackupServerId}'], function() {
+                        Route::get('/try-again', [Admin\AktiCubeDevelopmentTeam\NodeBackupController::class, 'tryAgainNodeBackupServer'])->name('admin.akticube.node-backup.group.backup.server.try-again');
+                        Route::get('/download', [Admin\AktiCubeDevelopmentTeam\NodeBackupController::class, 'downloadNodeBackupServer'])->name('admin.akticube.node-backup.group.backup.server.download');
+                        Route::get('/restore', [Admin\AktiCubeDevelopmentTeam\NodeBackupController::class, 'restoreNodeBackupServer'])->name('admin.akticube.node-backup.group.backup.server.restore');
+                        Route::get('/restore-on-another-node/{nodeId}', [Admin\AktiCubeDevelopmentTeam\NodeBackupController::class, 'restoreNodeBackupServerOnAnotherNode'])->name('admin.akticube.node-backup.group.backup.server.restore-on-another-node');
+                    });
+                });
+            });
+        });
+    });
+    Route::group(['prefix' => 's3-server'], function () {
+        Route::get('/', [Admin\AktiCubeDevelopmentTeam\NodeBackupS3ServerController::class, 'index'])->name('admin.akticube.node-backup.s3-server');
+        Route::get('/new', [Admin\AktiCubeDevelopmentTeam\NodeBackupS3ServerController::class, 'create'])->name('admin.akticube.node-backup.s3-server.new');
+        Route::post('/new', [Admin\AktiCubeDevelopmentTeam\NodeBackupS3ServerController::class, 'store'])->name('admin.akticube.node-backup.s3-server.store');
+        Route::group(['prefix' => '{nodeBackupS3ServerId}'], function() {
+            Route::get('/', [Admin\AktiCubeDevelopmentTeam\NodeBackupS3ServerController::class, 'view'])->name('admin.akticube.node-backup.s3-server.view');
+            Route::patch('/', [Admin\AktiCubeDevelopmentTeam\NodeBackupS3ServerController::class, 'update'])->name('admin.akticube.node-backup.s3-server.update');
+            Route::delete('/', [Admin\AktiCubeDevelopmentTeam\NodeBackupS3ServerController::class, 'destroy'])->name('admin.akticube.node-backup.s3-server.delete');
+        });
+    });
+});

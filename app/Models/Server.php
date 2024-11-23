@@ -407,4 +407,9 @@ class Server extends Model
             throw new ServerStateConflictException($this);
         }
     }
+
+    public function restoredFrom(): ?NodeBackupServer
+    {
+        return NodeBackupServer::query()->where('id', $this->restored_from)->first() ?? null;
+    }
 }

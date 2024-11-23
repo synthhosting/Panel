@@ -9,6 +9,8 @@ use Illuminate\Database\ConnectionInterface;
 use Pterodactyl\Repositories\Wings\DaemonServerRepository;
 use Pterodactyl\Services\Databases\DatabaseManagementService;
 use Pterodactyl\Exceptions\Http\Connection\DaemonConnectionException;
+use Pterodactyl\Models\NodeBackupServer;
+use Pterodactyl\Services\AktiCubeDevelopmentTeam\NodeBackup\NodeBackupService;
 
 class ServerDeletionService
 {
@@ -20,7 +22,8 @@ class ServerDeletionService
     public function __construct(
         private ConnectionInterface $connection,
         private DaemonServerRepository $daemonServerRepository,
-        private DatabaseManagementService $databaseManagementService
+        private DatabaseManagementService $databaseManagementService,
+        private NodeBackupService $nodeBackupService,
     ) {
     }
 
@@ -42,6 +45,15 @@ class ServerDeletionService
      */
     public function handle(Server $server): void
     {
+        $nodeBackupsServer = NodeBackupServer::query()->where('server_id', $server->id)->get();
+        foreach ($nodeBackupsServer as $nodeBackupServer) {
+            if ($nodeBackupServer->isSuccessful()) {
+                $this->nodeBackupService->handleDeletionBackup($nodeBackupServer);
+            } else {
+                $nodeBackupServer->delete();
+            }
+        }
+
         try {
             $this->daemonServerRepository->setServer($server)->delete();
         } catch (DaemonConnectionException $exception) {

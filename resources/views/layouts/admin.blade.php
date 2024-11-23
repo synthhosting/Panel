@@ -145,6 +145,11 @@
                                 <i class="fa fa-sitemap"></i> <span>Nodes</span>
                             </a>
                         </li>
+                        <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.akticube.node-backup') ?: 'active' }}">
+                            <a href="{{ route('admin.akticube.node-backup') }}">
+                                <i class="fa fa-save"></i> <span>Node Backup</span>
+                            </a>
+                        </li>
                         <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.servers') ?: 'active' }}">
                             <a href="{{ route('admin.servers') }}">
                                 <i class="fa fa-server"></i> <span>Servers</span>

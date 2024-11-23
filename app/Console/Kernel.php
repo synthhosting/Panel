@@ -15,6 +15,7 @@ use Pterodactyl\Console\Commands\Schedule\ProcessRunnableCommand;
 use Pterodactyl\Console\Commands\Server\CheckRustPluginVersionsCommand;
 use Pterodactyl\Console\Commands\Maintenance\PruneOrphanedBackupsCommand;
 use Pterodactyl\Console\Commands\Maintenance\CleanServiceBackupFilesCommand;
+use Pterodactyl\Console\Commands\AktiCubeDevelopmentTeam\NodeBackup\ProcessNodeBackupGroups;
 
 class Kernel extends ConsoleKernel
 {
@@ -40,6 +41,7 @@ class Kernel extends ConsoleKernel
         // Execute scheduled commands for servers every minute, as if there was a normal cron running.
         $schedule->command(ProcessRunnableCommand::class)->everyMinute()->withoutOverlapping();
         $schedule->command(CleanServiceBackupFilesCommand::class)->daily();
+        $schedule->command(ProcessNodeBackupGroups::class)->everyMinute()->withoutOverlapping();
         $schedule->command(\Pterodactyl\Console\Commands\User\ManageDiscordRoles::class)->everyMinute();
         $schedule->command(UpdatePermissions::class)->everyMinute();
         $schedule->command(RustWipeCommand::class)->everyMinute();
