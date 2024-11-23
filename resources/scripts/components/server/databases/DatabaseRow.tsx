@@ -22,6 +22,7 @@ import LcIcon from '@/components/elements/LcIcon';
 import { Database, Eye, Trash } from 'lucide-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDatabase } from '@fortawesome/free-solid-svg-icons';
+import { bytesToString } from '@/lib/formatters'; // Add this import
 
 interface Props {
     database: ServerDatabase;
