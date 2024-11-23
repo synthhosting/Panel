@@ -55,7 +55,7 @@ export default () => {
                                 categories.map((category, index) => (
                                     <Link key={index} to={'/knowledgebase/category/' + category.id}>
                                         <div
-                                            css={tw`p-4 rounded bg-gray-700 border border-gray-700 hover:border-gray-500`}
+                                            css={tw`p-4 rounded bg-[#1a1c1e] border border-[#1a1c1e] hover:border-[#0863bf]`}
                                         >
                                             <div css={tw`text-lg font-bold`}>{category.name}</div>
                                             <div css={tw`mt-2`}>{category.description}</div>
