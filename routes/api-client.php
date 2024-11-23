@@ -20,6 +20,13 @@ Route::get('/', [Client\ClientController::class, 'index'])->name('api:client.ind
 Route::get('/role', [Client\GetUserRoleController::class, 'index']);
 Route::get('/permissions', [Client\ClientController::class, 'permissions']);
 
+Route::group(['prefix' => '/knowledgebase'], function () {
+    Route::get('/categories', [Client\KnowledgebaseController::class, 'categories'])->name('api:client.knowledgebase.categories');
+    Route::get('/topics', [Client\KnowledgebaseController::class, 'topics'])->name('api:client.knowledgebase.topics');
+    Route::get('/topics-from/{id}', [Client\KnowledgebaseController::class, 'topicsfrom'])->name('api:client.knowledgebase.topics');
+    Route::get('/topic/{id}', [Client\KnowledgebaseController::class, 'topic'])->name('api:client.knowledgebase.topics');
+});
+
 Route::prefix('/account')->middleware(AccountSubject::class)->group(function () {
     Route::prefix('/')->withoutMiddleware(RequireTwoFactorAuthentication::class)->group(function () {
         Route::get('/', [Client\AccountController::class, 'index'])->name('api:client.account');

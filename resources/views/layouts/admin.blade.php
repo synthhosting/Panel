@@ -176,6 +176,11 @@
                                 <i class="fa fa-calendar"></i> <span>Schedule Template Manager</span>
                             </a>
                         </li>
+                        <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.knowledgebase') ?: 'active' }}">
+                            <a href="{{ route('admin.knowledgebase.index')}}">
+                                <i class="fa fa-folder-open"></i> <span>Knowledgebase Manager</span>
+                            </a>
+                        </li>
                         <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.players') ?: 'active' }}">
                         	<a href="{{ route('admin.players') }}">
                         		<i class="fa fa-user"></i> <span>Player Counter</span>

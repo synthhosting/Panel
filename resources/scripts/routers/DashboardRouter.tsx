@@ -10,6 +10,9 @@ import SubNavigation from '@/components/elements/SubNavigation';
 import { useLocation } from 'react-router';
 import Spinner from '@/components/elements/Spinner';
 import routes from '@/routers/routes';
+import KnowledgebaseContainer from '@/components/dashboard/KnowledgebaseContainer';
+import CategoryContainer from '@/components/dashboard/CategoryContainer';
+import TopicReadContainer from '@/components/dashboard/TopicReadContainer';
 import tw from "twin.macro"; 
 import { useStoreState } from "easy-peasy";
 import { ApplicationStore } from "@/state";
@@ -52,6 +55,15 @@ export default () => {
                                     <Component />
                                 </Route>
                             ))}
+                            <Route path={'/knowledgebase'} exact>
+                                <KnowledgebaseContainer />
+                            </Route>
+                            <Route path={'/knowledgebase/category/:id'}>
+                                <CategoryContainer />
+                            </Route>
+                            <Route path={'/knowledgebase/topic/read/:id'}>
+                                <TopicReadContainer />
+                            </Route>
                             <Route path={'*'}>
                                 <NotFound />
                             </Route>

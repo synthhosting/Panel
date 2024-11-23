@@ -8,6 +8,34 @@ Route::get('/', [Admin\BaseController::class, 'index'])->name('admin.index');
 
 /*
 |--------------------------------------------------------------------------
+| Knowledgebase Controller Routes
+|--------------------------------------------------------------------------
+|
+| Endpoint: /admin/knowledgebase
+|
+*/
+Route::group(['prefix' => 'knowledgebase'], function () {
+    Route::get('/', [Admin\KnowledgebaseController::class, 'index'])->name('admin.knowledgebase.index');
+
+    Route::group(['prefix' => 'topics'], function () {
+        Route::get('/new', [Admin\KnowledgebaseController::class, 'newtopic'])->name('admin.knowledgebase.topics.new');
+        Route::get('/edit/{id}', [Admin\KnowledgebaseController::class, 'edittopic'])->name('admin.knowledgebase.topics.edit');
+        Route::post('/delete/{id}', [Admin\KnowledgebaseController::class, 'deletetopic'])->name('admin.knowledgebase.topics.delete');
+        Route::post('/create', [Admin\KnowledgebaseController::class, 'createtopic'])->name('admin.knowledgebase.topics.create');
+        Route::post('/update/{id}', [Admin\KnowledgebaseController::class, 'updatetopic'])->name('admin.knowledgebase.topics.update');
+    });
+
+    Route::group(['prefix' => 'category'], function () {
+        Route::get('/new', [Admin\KnowledgebaseController::class, 'newcategory'])->name('admin.knowledgebase.category.new');
+        Route::get('/edit/{id}', [Admin\KnowledgebaseController::class, 'editcategory'])->name('admin.knowledgebase.category.edit');
+        Route::post('/delete/{id}', [Admin\KnowledgebaseController::class, 'deletecategory'])->name('admin.knowledgebase.category.delete');
+        Route::post('/create', [Admin\KnowledgebaseController::class, 'createcategory'])->name('admin.knowledgebase.category.create');
+        Route::post('/update/{id}', [Admin\KnowledgebaseController::class, 'updatecategory'])->name('admin.knowledgebase.category.update');
+    });
+});
+
+/*
+|--------------------------------------------------------------------------
 | Helionix Controller Routes
 |--------------------------------------------------------------------------
 |

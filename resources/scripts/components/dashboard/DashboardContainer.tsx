@@ -16,6 +16,7 @@ import Pagination from '@/components/elements/Pagination';
 import { useLocation } from 'react-router-dom';
 import LcIcon from '@/components/elements/LcIcon';
 import { CircleHelp, CreditCard, Globe, Rocket } from 'lucide-react';
+import { faCogs, faLayerGroup, faSignOutAlt, faFolderOpen } from '@fortawesome/free-solid-svg-icons';
 
 export default () => {
     const layout = useStoreState((state: ApplicationStore) => state.helionix.data!.dash_layout);
@@ -23,8 +24,6 @@ export default () => {
     const dash_billing_url = useStoreState((state: ApplicationStore) => state.helionix.data!.dash_billing_url);
     const dash_billing_blank = useStoreState((state: ApplicationStore) => state.helionix.data!.dash_billing_blank);
     const dash_website_status = useStoreState((state: ApplicationStore) => state.helionix.data!.dash_website_status);
-    const dash_website_url = useStoreState((state: ApplicationStore) => state.helionix.data!.dash_website_url);
-    const dash_website_blank = useStoreState((state: ApplicationStore) => state.helionix.data!.dash_website_blank);
     const dash_support_status = useStoreState((state: ApplicationStore) => state.helionix.data!.dash_support_status);
     const dash_support_url = useStoreState((state: ApplicationStore) => state.helionix.data!.dash_support_url);
     const dash_support_blank= useStoreState((state: ApplicationStore) => state.helionix.data!.dash_support_blank);
@@ -33,7 +32,7 @@ export default () => {
     const dash_uptime_blank = useStoreState((state: ApplicationStore) => state.helionix.data!.dash_uptime_blank);
     const dash = [
         { status: dash_billing_status, url: dash_billing_url, blank: dash_billing_blank, icon: CreditCard, title: "Billing", description: "Manage your service" },
-        { status: dash_website_status, url: dash_website_url, blank: dash_website_blank, icon: Globe, title: "Website", description: "Visit our website" },
+        { status: dash_website_status, url: '/knowledgebase', blank: false, icon: Globe, title: "Knowledge Base", description: "Visit our knowledge base" },
         { status: dash_support_status, url: dash_support_url, blank: dash_support_blank, icon: CircleHelp, title: "Support", description: "Get our support" },
         { status: dash_uptime_status, url: dash_uptime_url, blank: dash_uptime_blank, icon: Rocket, title: "Status", description: "Check node status" },
     ];
