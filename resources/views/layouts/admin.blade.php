@@ -171,6 +171,11 @@
                                 <i class="fa fa-calendar"></i> <span>Schedule Template Manager</span>
                             </a>
                         </li>
+                        <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.players') ?: 'active' }}">
+                        	<a href="{{ route('admin.players') }}">
+                        		<i class="fa fa-user"></i> <span>Player Counter</span>
+                        	</a>
+                        </li>
                         <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.akticube.automatic-phpmyadmin') ?: 'active' }}">
                             <a href="{{ route('admin.akticube.automatic-phpmyadmin') }}">
                                 <i class="fa fa-database"></i> <span>Automatic-phpMyAdmin</span>

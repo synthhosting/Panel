@@ -14,6 +14,7 @@ import TitledGreyBox from "@/components/elements/TitledGreyBox";
 import ServerContentBlock from "@/components/elements/ServerContentBlock";
 import { Activity, AlarmClock, Blocks, Cpu, Fingerprint, HardDrive, MemoryStick, Navigation, Package, Radio, ServerCog } from "lucide-react";
 import LcIcon from "@/components/elements/LcIcon";
+import PlayerCounter from '@/components/server/console/PlayerCounter';
 
 type Stats = Record<"memory" | "cpu" | "disk" | "uptime" | "rx" | "tx", number>;
 
@@ -129,13 +130,11 @@ export default () => {
           <div css={tw`overflow-hidden whitespace-nowrap`}>
             <div css={tw`flex items-center`}>
               <div>
-                <LcIcon icon={Package} />
+                <FontAwesomeIcon icon={faUsers} />
               </div>
-              <a css={tw`ml-2 uppercase font-semibold`}>UUID</a>
+              <a css={tw`ml-2 uppercase font-semibold`}>Players</a>
             </div>
-            <CopyOnClick text={uuid}>
-              <p css={tw`mb-4`}>{uuid}</p>
-            </CopyOnClick>
+            <PlayerCounter />
           </div>
           <div css={tw`overflow-hidden whitespace-nowrap`}>
             <div css={tw`flex items-center`}>
