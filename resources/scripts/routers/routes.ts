@@ -160,7 +160,7 @@ export default {
         {
             path: '/plugins',
             permission: 'file.*',
-            eggIds: [1, 3],
+            nestId: 1,
             name: 'Plugin Manager',
             icon: CirclePlay,
             component: PluginManagerContainer,
@@ -170,7 +170,7 @@ export default {
             permissions: 'file.*',
             name: 'Mod Installer',
             icon: CirclePlay,
-            eggIds: [1, 3],
+            nestId: 1,
             component: ModManagerContainer,
         },
         {
@@ -179,7 +179,7 @@ export default {
             name: 'Modpacks',
             component: ModpacksContainer,
             icon: CirclePlay,
-            eggIds: [1, 3],
+            nestId: 1,
         },
         {
             path: '/wipe',
