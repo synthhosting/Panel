@@ -20,7 +20,7 @@ import RustPluginsContainer from '@/components/server/RustPluginsContainer';
 import PluginManagerContainer from '@/components/server/plugin/PluginManagerContainer';
 import ModManagerContainer from '@/components/server/mods/ModManagerContainer';
 import ModpacksContainer from '@/components/server/modpacks/ModpacksContainer';
-import { ArchiveRestore, Bolt, CalendarCheck, CirclePlay, Database, Files, History, LayoutDashboard, Network, Terminal, UsersRound } from 'lucide-react';
+import { ArchiveRestore, Bolt, CalendarCheck, CirclePlay, Database, Files, History, LayoutDashboard, Network, Terminal, UsersRound, HardDriveDownload, Wrench } from 'lucide-react';
 
 // Each of the router files is already code split out appropriately — so
 // all of the items above will only be loaded in when that router is loaded.
@@ -162,7 +162,7 @@ export default {
             permission: 'file.*',
             nestId: 1,
             name: 'Plugin Manager',
-            icon: CirclePlay,
+            icon: HardDriveDownload,
             component: PluginManagerContainer,
         },
         {
@@ -182,20 +182,20 @@ export default {
             nestId: 1,
         },
         {
-            path: '/wipe',
-            permission: 'wipe.*',
-            name: 'Rust Wipe',
-            nestId: 4,
-            icon: CirclePlay,
-            component: RustWipeContainer,
-        },
-        {
             path: '/plugins',
             permission: 'rustplugins.*',
             name: 'Rust Plugins',
             nestId: 4,
-            icon: CirclePlay,
+            icon: HardDriveDownload,
             component: RustPluginsContainer,
+        },
+        {
+            path: '/wipe',
+            permission: 'wipe.*',
+            name: 'Rust Wipe',
+            nestId: 4,
+            icon: Wrench,
+            component: RustWipeContainer,
         },
         {
             path: "/settings",
