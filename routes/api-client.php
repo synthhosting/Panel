@@ -96,6 +96,7 @@ Route::group([
         Route::post('/delete', [Client\Servers\FileController::class, 'delete']);
         Route::post('/create-folder', [Client\Servers\FileController::class, 'create']);
         Route::post('/chmod', [Client\Servers\FileController::class, 'chmod']);
+        Route::post('/size', [Client\Servers\FolderSizeController::class, 'getFolderSize']);
         Route::post('/pull', [Client\Servers\FileController::class, 'pull'])->middleware(['throttle:10,5']);
         Route::get('/upload', Client\Servers\FileUploadController::class);
     });
