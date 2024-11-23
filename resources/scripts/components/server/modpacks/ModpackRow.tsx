@@ -106,7 +106,7 @@ export default ({ provider, modpack, className }: Props) => {
                     Please note that modpack updates can cause world corruption. You are strongly advised to make a
                     backup before updating a modpack.
                 </p>
-                <div css={tw`mt-6 bg-neutral-700 p-4 rounded`}>
+                <GreyRowBox css={[tw`mt-6 p-4 rounded`, { backgroundColor: '#2b2f32' }]}>
                     <Switch
                         defaultChecked={deleteServerFiles}
                         onChange={() => {
@@ -116,13 +116,14 @@ export default ({ provider, modpack, className }: Props) => {
                         label='Delete files'
                         description='Delete all your server files before installing the modpack. This is irreversible!'
                     />
-                </div>
+                </GreyRowBox>
             </Dialog.Confirm>
 
             <GreyRowBox className={className} css={tw`flex items-center`}>
                 <img
                     src={modpack.iconUrl ?? 'https://placehold.co/32'}
-                    css={tw`rounded-md w-8 h-8 sm:w-16 sm:h-16 object-contain flex items-center justify-center bg-neutral-500 sm:p-3`}
+                    css={tw`rounded-md w-8 h-8 sm:w-16 sm:h-16 object-contain flex items-center justify-center sm:p-3`}
+                    style={{ backgroundColor: '#2b2f32' }}
                 />
                 <div css={tw`flex flex-col ml-3 w-9/12`}>
                     {modpack.url ? (
