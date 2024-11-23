@@ -9,6 +9,8 @@ import GreyRowBox from '@/components/elements/GreyRowBox';
 import EditFilesPermissions from '@/components/server/users/EditFilesPermissions';
 import LcIcon from '@/components/elements/LcIcon';
 import { Lock, Pen, Unlock } from 'lucide-react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUserLock } from '@fortawesome/free-solid-svg-icons';
 
 interface Props {
     subuser: Subuser;
