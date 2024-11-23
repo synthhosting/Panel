@@ -36,6 +36,7 @@ export default () => {
     const announcement = useStoreState((state: ApplicationStore) => state.helionix.data!.announcements_status);
     const uptime = useStoreState((state: ApplicationStore) => state.helionix.data!.uptime_nodes_status);
     const serverNestId = ServerContext.useStoreState((state) => state.server.data?.nestId);
+    const serverEggId = ServerContext.useStoreState((state) => state.server.data?.eggId);
     const [isLoggingOut, setIsLoggingOut] = useState(false);
     const [isNavVisible, setIsNavVisible] = useState(false);
     const navRef = useRef<HTMLDivElement>(null);
@@ -139,7 +140,10 @@ export default () => {
                     .filter((route) => !!route.name)
                     .map((route) =>
                     route.permission ? (
-                        (!route.nestId || route.nestId === serverNestId) && (
+                        (!route.nestId || route.nestId === serverNestId) &&
+                        (!route.eggId || route.eggId === serverEggId) &&
+                        (!route.nestIds || route.nestIds.includes(serverNestId)) &&
+                        (!route.eggIds || route.eggIds.includes(serverEggId)) && (
                             <Can key={route.path} action={route.permission} matchAny>
                                 <NavLink to={to(route.path, true)} exact={route.exact} css={tw`flex items-center`}>
                                     <LcIcon icon={route.icon} size={20}/>
@@ -148,10 +152,15 @@ export default () => {
                             </Can>
                         )
                     ) : (
-                        <NavLink key={route.path} to={to(route.path, true)} exact={route.exact} css={tw`flex items-center`}>
-                            <LcIcon icon={route.icon} size={20} />
-                            <NavigationButton>{route.name}</NavigationButton>
-                        </NavLink>
+                        (!route.nestId || route.nestId === serverNestId) &&
+                        (!route.eggId || route.eggId === serverEggId) &&
+                        (!route.nestIds || route.nestIds.includes(serverNestId)) &&
+                        (!route.eggIds || route.eggIds.includes(serverEggId)) && (
+                            <NavLink key={route.path} to={to(route.path, true)} exact={route.exact} css={tw`flex items-center`}>
+                                <LcIcon icon={route.icon} size={20} />
+                                <NavigationButton>{route.name}</NavigationButton>
+                            </NavLink>
+                        )
                     )
                     )}
                 {rootAdmin && (
