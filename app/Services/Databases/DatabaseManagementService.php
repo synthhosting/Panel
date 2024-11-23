@@ -149,6 +149,16 @@ class DatabaseManagementService
     }
 
     /**
+     * Get database size in bytes.
+     */
+    public function getDatabaseSize(Database $database): int
+    {
+        $this->dynamic->set('dynamic', $database->database_host_id);
+
+        return $this->repository->getDatabaseSize($database->database);
+    }
+
+    /**
      * Create the database if there is not an identical match in the DB. While you can technically
      * have the same name across multiple hosts, for the sake of keeping this logic easy to understand
      * and avoiding user confusion we will ignore the specific host and just look across all hosts.

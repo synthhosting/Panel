@@ -168,6 +168,10 @@ export default ({ database, className }: Props) => {
                     </CopyOnClick>
                 </div>
                 <div css={tw`ml-8 text-center hidden md:block`}>
+                    <p css={tw`text-sm`}>{bytesToString(database.size)}</p>
+                    <p css={tw`mt-1 text-2xs text-neutral-500 uppercase select-none`}>Size</p>
+                </div>
+                <div css={tw`ml-8 text-center hidden md:block`}>
                     <CopyOnClick text={database.connectionString}>
                         <p css={tw`text-sm`}>{database.connectionString}</p>
                     </CopyOnClick>
