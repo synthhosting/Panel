@@ -79,7 +79,7 @@ export default () => {
                             key={index}
                             href={dash.url}
                             target={dash.blank == true ? '_blank' : undefined} 
-                            css={tw`flex-1 h-20 bg-helionix-color2 rounded-xl p-4 border border-[#1873d3] hover:border-[#1873d3] transition-colors duration-150`}
+                            css={tw`flex-1 h-20 bg-helionix-color2 rounded-xl p-4 hover:border-[#1873d3] border-2 border-transparent transition-colors duration-150`}
                         >
                             <div css={tw`flex items-center`}>
                                 <div className={'w-auto mr-4'}>
