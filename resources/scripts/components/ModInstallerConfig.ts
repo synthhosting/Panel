@@ -46,8 +46,8 @@ const data: DataType = {
             versionsButton: tw`rounded-lg p-1 mx-auto w-full text-lg bg-gray-600 hover:bg-indigo-500 text-white mt-4`,
             entryStyle: tw`rounded-lg hover:ring-2 ring-gray-500`,
             rounding: 'rounded-full',
-            primaryColor: '#202020',
-            secondaryColor: '#101010',
+            primaryColor: '#1A1C1E',
+            secondaryColor: '#2B2F32',
             inputBorder: '2',
         },
     },
@@ -56,7 +56,7 @@ const data: DataType = {
     },
 };
 
-const style = data.style['default'];
+const style = data.style['dark'];
 const config = data.config;
 
 export { style, config };

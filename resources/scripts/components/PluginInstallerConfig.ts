@@ -64,8 +64,8 @@ const data: DataType = {
             entryStyle: tw`rounded-lg hover:ring-2 ring-gray-500`,
             plugins: tw`grid lg:grid-rows-4 lg:grid-cols-4 mt-4 mx-10 gap-4`,
             rounding: 'rounded-full',
-            primaryColor: '#202020',
-            secondaryColor: '#101010',
+            primaryColor: '#1A1C1E',
+            secondaryColor: '#2B2F32',
             inputBorder: '2',
         },
     },
@@ -75,7 +75,7 @@ const data: DataType = {
     },
 };
 
-const style = data.style['default'];
+const style = data.style['dark'];
 const config = data.config;
 
 export { style, config };
