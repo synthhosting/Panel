@@ -65,6 +65,7 @@ class Permission extends Model
     public const ACTION_SETTINGS_REINSTALL = 'settings.reinstall';
 
     public const ACTION_ACTIVITY_READ = 'activity.read';
+    public const ACTION_ARK_VIEW = 'arkmods.view';
     public const ACTION_WIPE_MANAGE = 'wipe.manage';
     public const ACTION_RUSTPLUGINS_MANAGE = 'rustplugins.mamage';
 
@@ -139,6 +140,13 @@ class Permission extends Model
                 'delete' => 'Allows a user to delete files or directories.',
                 'archive' => 'Allows a user to archive the contents of a directory as well as decompress existing archives on the system.',
                 'sftp' => 'Allows a user to connect to SFTP and manage server files using the other assigned file permissions.',
+            ],
+        ],
+
+        'arkmods' => [
+            'description' => 'Permissions that control a user\'s ability to use the ark modmanager for this server.',
+            'keys' => [
+                'view' => 'Allows a user to view the (installed) mod list in the modmanager.',
             ],
         ],
 

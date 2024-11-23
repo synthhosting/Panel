@@ -190,6 +190,12 @@ Route::group([
         Route::post('/install', [Client\Servers\ModpackController::class, 'install']);
     });
 
+    Route::group(['prefix' => '/ark'], function () {
+        Route::post('/mods', [Client\Servers\ArkModsController::class, 'index']);
+        Route::post('/modids', [Client\Servers\ArkModsController::class, 'modids']);
+        Route::post('/installed', [Client\Servers\ArkModsController::class, 'installed']);
+    });
+
 });
 
 /*

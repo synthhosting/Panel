@@ -14,6 +14,7 @@ import AccountApiContainer from '@/components/dashboard/AccountApiContainer';
 import AccountSSHContainer from '@/components/dashboard/ssh/AccountSSHContainer';
 import ActivityLogContainer from '@/components/dashboard/activity/ActivityLogContainer';
 import ServerActivityLogContainer from '@/components/server/ServerActivityLogContainer';
+import ArkModsContainer from '@/components/server/ark/ModsContainer';
 import RustWipeContainer from '@/components/server/wipe/RustWipeContainer';
 import RustPluginsContainer from '@/components/server/RustPluginsContainer';
 import PluginManagerContainer from '@/components/server/plugin/PluginManagerContainer';
@@ -194,6 +195,13 @@ export default {
             nestId: 4,
             icon: CirclePlay,
             component: RustPluginsContainer,
+        },
+        {
+            path: '/ark/mods',
+            permission: 'arkmods.*',
+            name: 'Mods',
+            component: ArkModsContainer,
+            eggId: 19,
         },
         {
             path: "/settings",
