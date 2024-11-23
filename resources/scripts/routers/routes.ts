@@ -20,7 +20,7 @@ import RustPluginsContainer from '@/components/server/RustPluginsContainer';
 import PluginManagerContainer from '@/components/server/plugin/PluginManagerContainer';
 import ModManagerContainer from '@/components/server/mods/ModManagerContainer';
 import ModpacksContainer from '@/components/server/modpacks/ModpacksContainer';
-import { ArchiveRestore, Bolt, CalendarCheck, CirclePlay, Database, Files, History, LayoutDashboard, Network, Terminal, UsersRound, HardDriveDownload, Wrench } from 'lucide-react';
+import { ArchiveRestore, Bolt, CalendarCheck, CirclePlay, Database, Files, History, LayoutDashboard, Network, Terminal, UsersRound, HardDriveDownload, Wrench, FileDown, Package2 } from 'lucide-react';
 
 // Each of the router files is already code split out appropriately — so
 // all of the items above will only be loaded in when that router is loaded.
@@ -169,7 +169,7 @@ export default {
             path: '/mods',
             permissions: 'file.*',
             name: 'Mod Installer',
-            icon: CirclePlay,
+            icon: FileDown,
             nestId: 1,
             component: ModManagerContainer,
         },
@@ -178,7 +178,7 @@ export default {
             permission: 'file.*',
             name: 'Modpacks',
             component: ModpacksContainer,
-            icon: CirclePlay,
+            icon: Package2,
             nestId: 1,
         },
         {
