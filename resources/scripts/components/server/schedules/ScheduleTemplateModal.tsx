@@ -72,7 +72,7 @@ const TemplateModal: React.FC<TemplateModalProps> = ({ visible, onClose, uuid, o
                 </p>
                 <div css={tw`mt-4`}>
                     {templates.map(template => (
-                        <div key={template.id} css={tw`mt-2 bg-neutral-700 border border-neutral-800 shadow-inner p-4 rounded flex items-center justify-between`}>
+                        <div key={template.id} css={tw`mt-2 bg-[#1a1c1e] border border-neutral-800 shadow-inner p-4 rounded flex items-center justify-between`}>
                             <div css={tw`flex-grow`}>
                                 <h3 css={tw`text-base font-semibold`}>{template.name}</h3>
                                 <p css={tw`text-sm text-gray-300`}>{template.description}</p>
