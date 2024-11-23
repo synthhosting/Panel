@@ -197,13 +197,6 @@ export default {
             component: RustPluginsContainer,
         },
         {
-            path: '/ark/mods',
-            permission: 'arkmods.*',
-            name: 'Mods',
-            component: ArkModsContainer,
-            eggId: 19,
-        },
-        {
             path: "/settings",
             permission: ["settings.*", "file.sftp"],
             name: "Settings",
