@@ -54,53 +54,49 @@ const PlayerCounter = () => {
                     <FlashMessageRender byKey={'server:players'} />
                 </div>
             }
-            {!data ?
+            {!data ? (
                 <div css={tw`flex items-center w-full col-span-6`}>
                     <Spinner size={'small'} centered />
                 </div>
-                :
+            ) : (
                 <>
-                    <div className={classNames(styles.stat_block, 'bg-gray-600')}>
-                        <div className={classNames(styles.status_bar || 'bg-gray-700')} />
+                    <div>
                         <div className={'flex flex-col justify-center overflow-hidden w-full'}>
-                            <p className={'font-header leading-tight text-xs md:text-sm text-gray-200'}>Online Players</p>
-                            <div className={`h-[${data.show === 1 ? '3.5' : '2.5'}rem] w-full font-semibold text-gray-50 truncate`}>
-                                {data.show === 1 ?
+                            <div className={`h-[${data.show === 1 ? '3.5' : '2.5'}rem] w-full font-semibold text-gray-100 truncate`}>
+                                {data.show === 1 ? (
                                     <>
-                                        <p css={tw`text-xs uppercase`}>
-                                            <FontAwesomeIcon icon={faUsers} fixedWidth css={tw`mr-1 text-green-500`} />
-                                            Players: {data.onlinePlayers}/{data.maxPlayers}
+                                        <p css={tw`mb-4`}>
+                                            <span onClick={() => setVisible(true)} css={tw`cursor-pointer`}>
+                                                Players: {data.onlinePlayers}/{data.maxPlayers}
+                                            </span>
                                         </p>
-                                        <div css={tw`text-center pt-2`}>
-                                            <Button color={'primary'} size={'xsmall'} css={tw`w-full`} onClick={() => setVisible(true)}><FontAwesomeIcon icon={faList} /> View Players</Button>
-                                        </div>
                                     </>
-                                    :
-                                    <>
-                                        Failed to get online players.
-                                    </>
-                                }
+                                ) : (
+                                    <div css={tw`mb-4`}>
+                                    Players: Error
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>
                     <Modal visible={visible} onDismissed={() => setVisible(false)}>
                         <>
                             <b>Online Players:</b><br /><br />
-                            {data.players.length > 0 ?
+                            {data.players.length > 0 ? (
                                 <div css={tw`w-full mt-4`}>
                                     {data.players.map((item, key) => (
                                         <Code key={key}>{item}</Code>
                                     ))}
                                 </div>
-                                :
+                            ) : (
                                 <>
-                                    There are no online player.
+                                    There are no online players.
                                 </>
-                            }
+                            )}
                         </>
                     </Modal>
                 </>
-            }
+            )}
         </>
     );
 };
