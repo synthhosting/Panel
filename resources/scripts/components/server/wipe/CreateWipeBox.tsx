@@ -175,7 +175,9 @@ export default ({ name, description, mutate, timezones }: Props) => {
                         <div css={tw`grid grid-cols-2 gap-4 mt-5`}>
                             <FormikSwitch
                                 name={'randomSeed'}
-                                description={"Generate a random seed on this wipe."}
+                                description={
+                                    "Generate a random seed on this wipe."
+                                }
                                 label={'Random Seed'}
                                 checked={values.randomSeed}
                                 readOnly={!!values.seed || !!values.level || values.randomLevel || isSubmitting}
