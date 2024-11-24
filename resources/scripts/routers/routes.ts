@@ -198,12 +198,6 @@ export default {
             component: RustWipeContainer,
         },
         {
-            path: '/importer',
-            name: 'Importer',
-            permission: 'file.delete',
-            component: ServerImporterContainer,
-        },
-        {
             path: "/settings",
             permission: ["settings.*", "file.sftp"],
             name: "Settings",
