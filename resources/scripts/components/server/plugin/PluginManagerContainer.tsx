@@ -451,7 +451,7 @@ export default () => {
                                 backgroundColor: style.primaryColor,
                                 borderColor: style.secondaryColor,
                             }}
-                            css={tw`w-full sm:w-8 rounded-l-full hover:font-white`}
+                            css={tw`w-full sm:w-8 rounded-l-full hover:font-black`}
                             disabled={page === 1}
                             onClick={decreasePage}
                         >
