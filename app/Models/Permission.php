@@ -139,6 +139,7 @@ class Permission extends Model
                 'delete' => 'Allows a user to delete files or directories.',
                 'archive' => 'Allows a user to archive the contents of a directory as well as decompress existing archives on the system.',
                 'sftp' => 'Allows a user to connect to SFTP and manage server files using the other assigned file permissions.',
+                'smart' => 'Use the smart file search function.',
             ],
         ],
 

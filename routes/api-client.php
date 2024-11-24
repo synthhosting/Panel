@@ -111,6 +111,7 @@ Route::group([
         Route::post('/size', [Client\Servers\FolderSizeController::class, 'getFolderSize']);
         Route::post('/pull', [Client\Servers\FileController::class, 'pull'])->middleware(['throttle:10,5']);
         Route::get('/upload', Client\Servers\FileUploadController::class);
+        Route::post('/search/smart', [Client\Servers\SmartSearchController::class, 'search'])->middleware(['throttle:3,1']);
     });
 
     Route::group(['prefix' => '/schedules'], function () {
