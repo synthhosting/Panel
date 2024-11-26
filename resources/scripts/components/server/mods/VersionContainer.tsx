@@ -30,7 +30,7 @@ export default ({ file, setInstalled }: Props) => {
 
     return (
         <>
-            <div style={{ backgroundColor: style.primaryColor }} css={tw`rounded-lg grid p-4`}>
+            <div style={{ backgroundColor: style.primaryColor }} css={tw`rounded-lg grid p-4 text-white`}>
                 <div css={tw`mx-auto`}>Version: {file.displayName}</div>
                 <div css={tw`mx-auto`}>Downloads: {file.downloadCount.toLocaleString(undefined)}</div>
                 <button css={style.buttonInstall} onClick={downloadPlugin}>

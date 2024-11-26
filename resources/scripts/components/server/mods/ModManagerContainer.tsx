@@ -142,7 +142,7 @@ export default () => {
                             backgroundColor: style.primaryColor,
                             borderColor: style.secondaryColor,
                         }}
-                        className={`w-full sm:w-8 rounded-l-full hover:font-black`}
+                        className={`w-full sm:w-8 rounded-l-full hover:font-white`}
                         disabled={page === 0}
                         onClick={decreasePage}
                     >
@@ -184,7 +184,7 @@ export default () => {
                         backgroundColor: style.primaryColor,
                         borderColor: style.secondaryColor,
                     }}
-                    className={`bg-neutral-700 border-2 text-lg p-2 sm:ml-5 my-2 sm:my-0 w-full sm:w-auto text-center ${
+                    className={`bg-neutral-700 border-2 text-lg p-2 sm:ml-5 my-2 sm:my-0 w-full sm:w-auto text-center text-white ${
                         style.rounding ?? ''
                     }`}
                     value={version}
@@ -210,7 +210,7 @@ export default () => {
                 </select>
                 <select
                     style={{ backgroundColor: style.primaryColor, borderColor: style.secondaryColor }}
-                    className={`bg-neutral-700 border-2 border-cyan-700 text-lg p-2 sm:ml-5 w-full sm:w-auto ${
+                    className={`bg-neutral-700 border-2 border-cyan-700 text-lg p-2 sm:ml-5 w-full sm:w-auto text-white ${
                         style.rounding ?? ''
                     }`}
                     defaultValue={category}
