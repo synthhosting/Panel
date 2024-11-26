@@ -186,6 +186,11 @@
                         		<i class="fa fa-user"></i> <span>Player Counter</span>
                         	</a>
                         </li>
+                        <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.veltastudios.nodes.wings-updater') ?: 'active' }}">
+                            <a href="{{ route('admin.veltastudios.nodes.wings-updater.index') }}">
+                                <i class="fa fa-refresh"></i> <span>Wings Updater</span>
+                            </a>
+                        </li>
                         <li class="{{ ! starts_with(Route::currentRouteName(), 'admin.akticube.automatic-phpmyadmin') ?: 'active' }}">
                             <a href="{{ route('admin.akticube.automatic-phpmyadmin') }}">
                                 <i class="fa fa-database"></i> <span>Automatic-phpMyAdmin</span>

@@ -438,3 +438,24 @@ Route::group(['prefix' => 'node-backup'], function() {
         });
     });
 });
+
+/*
+|--------------------------------------------------------------------------
+| Velta Studios Controller Routes
+|--------------------------------------------------------------------------
+|
+| Endpoint: /admin/veltastudios
+|
+*/
+Route::group(['prefix' => 'veltastudios'], function () {
+    Route::get('/nodes/wings-updater', [Admin\VeltaStudios\WingsUpdaterController::class, 'index'])->name('admin.veltastudios.nodes.wings-updater.index');
+    Route::get('/nodes/wings-updater/version', [Admin\VeltaStudios\WingsUpdaterController::class, 'getVersion'])->name('admin.veltastudios.nodes.wings-updater.version');
+    Route::get('/nodes/wings-updater/wings-version', [Admin\VeltaStudios\WingsUpdaterController::class, 'getWingsVersion'])->name('admin.veltastudios.nodes.wings-updater.wingsVersion');
+    Route::get('/nodes/wings-updater/update', [Admin\VeltaStudios\WingsUpdaterController::class, 'showUpdatePage'])->name('admin.veltastudios.nodes.wings-updater.showUpdatePage');
+    Route::post('/nodes/wings-updater/update', [Admin\VeltaStudios\WingsUpdaterController::class, 'executeUpdate'])->name('admin.veltastudios.nodes.wings-updater.executeUpdate');
+    Route::post('/nodes/wings-updater/configure', [Admin\VeltaStudios\WingsUpdaterController::class, 'saveConfiguration'])->name('admin.veltastudios.nodes.wings-updater.saveConfiguration');
+    Route::get('/nodes/wings-updater/test', [Admin\VeltaStudios\WingsUpdaterController::class, 'testConnections'])->name('admin.veltastudios.nodes.wings-updater.testConnections');
+    Route::get('/nodes/wings-updater/test/{nodeId}', [Admin\VeltaStudios\WingsUpdaterController::class, 'testConnection'])->name('admin.veltastudios.nodes.wings-updater.testConnection');
+    Route::post('/nodes/wings-updater/update/{nodeId}', [Admin\VeltaStudios\WingsUpdaterController::class, 'updateNode'])->name('admin.veltastudios.nodes.wings-updater.update');
+    Route::get('/nodes/system-information/{nodeId}', [Admin\VeltaStudios\WingsUpdaterController::class, 'getNodeSystemInformation'])->name('admin.veltastudios.nodes.systemInformation');
+});
