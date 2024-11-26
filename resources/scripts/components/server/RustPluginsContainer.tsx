@@ -220,7 +220,7 @@ export default () => {
                             {tag}
                         </small>
                     ))}
-                    <TitledGreyBox css={tw`mt-4`}>
+                    <TitledGreyBox title="Plugin Details" css={tw`mt-4`}>
                         <b>Description:</b> {plugin.description}
                         <br />
                         <div css={tw`flex`}>
