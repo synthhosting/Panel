@@ -62,6 +62,13 @@
                                     <p class="text-muted"><small>The default language to use when rendering UI components.</small></p>
                                 </div>
                             </div>
+                            <div class="form-group col-md-4">
+                                <label class="control-label">Tawk.to Direct Chat Link</label>
+                                <div>
+                                    <input type="text" class="form-control" name="app:tawkto" value="{{ old('app:tawkto', config('app.tawkto')) }}" />
+                                    <p class="text-muted"><small>This is the direct chat link provided by Tawk.to. </small></p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="box-footer">
