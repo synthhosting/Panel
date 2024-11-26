@@ -19,7 +19,6 @@ import RustPluginsContainer from '@/components/server/RustPluginsContainer';
 import PluginManagerContainer from '@/components/server/plugin/PluginManagerContainer';
 import ModManagerContainer from '@/components/server/mods/ModManagerContainer';
 import ModpacksContainer from '@/components/server/modpacks/ModpacksContainer';
-import ServerImporterContainer from '@/components/server/serverimporter/ServerImporterContainer';
 import { ArchiveRestore, Bolt, CalendarCheck, CirclePlay, Database, Files, History, LayoutDashboard, Network, Terminal, UsersRound, HardDriveDownload, Wrench, FileDown, Package2 } from 'lucide-react';
 
 // Each of the router files is already code split out appropriately — so
@@ -196,12 +195,6 @@ export default {
             nestId: 4,
             icon: Wrench,
             component: RustWipeContainer,
-        },
-        {
-            path: '/importer',
-            name: 'Importer',
-            permission: 'file.delete',
-            component: ServerImporterContainer,
         },
         {
             path: "/settings",
