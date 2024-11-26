@@ -220,7 +220,7 @@ export default () => {
                             {tag}
                         </small>
                     ))}
-                    <div css={tw`mt-4`}>
+                    <TitledGreyBox css={tw`mt-4`}>
                         <b>Description:</b> {plugin.description}
                         <br />
                         <div css={tw`flex`}>
@@ -239,7 +239,7 @@ export default () => {
                         <br />
                         <b>Watchers:</b> {plugin.watchersShortened}
                         <br />
-                    </div>
+                    </TitledGreyBox>
                     <div css={tw`mt-8`}>
                         {!installed?.find((i) => i.name.replace('.cs', '') === plugin.name) && (
                             <Switch
