@@ -27,6 +27,7 @@ import CategoryContainer from "@/components/elements/helionix/navigation/Categor
 import NavigationButton from "@/components/elements/helionix/navigation/NavigationButton";
 import LcIcon from '@/components/elements/LcIcon';
 import UserAvatar from './UserAvatar';
+import GreyRowBox from '@/components/elements/GreyRowBox';
 
 export default () => {
     const logo = useStoreState((state: ApplicationStore) => state.helionix.data!.logo);
@@ -174,7 +175,7 @@ export default () => {
                         </a>
                     )}
                 </NavigationBar>
-                <div className="sticky bottom-0 bg-gray-700 pb-4 px-5 z-20 mt-auto backdrop-blur-xl">
+                <GreyRowBox>
                     <hr className={'border-b border-gray-500 mb-4'}/>
                     <div className="flex w-full justify-between items-center">
                         <Link to="/account" className="flex items-center gap-x-2">
@@ -184,7 +185,7 @@ export default () => {
                             </div>
                         </Link>
                     </div>
-                </div>
+                </GreyRowBox>
             </Navigation>
         </>
     );
