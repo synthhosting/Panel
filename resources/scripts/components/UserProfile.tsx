@@ -1,39 +1,41 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Menu, Dropdown, Avatar } from 'antd';
 import { UserOutlined, LogoutOutlined, SettingOutlined, DownOutlined } from '@ant-design/icons';
-import Gravatar from 'react-gravatar';
 import tw from 'twin.macro';
 
 const UserProfile: React.FC<{ email: string, userName: string, rootAdmin: boolean, onTriggerLogout: () => void, closeNav: () => void }> = ({ email, userName, rootAdmin, onTriggerLogout, closeNav }) => {
-    const menu = (
-        <Menu>
-            <Menu.Item key="1" icon={<UserOutlined />}>
-                <NavLink to={"/account"} exact onClick={closeNav}>
-                    Account
-                </NavLink>
-            </Menu.Item>
-            {rootAdmin && (
-                <Menu.Item key="2" icon={<SettingOutlined />}>
-                    <a href={"/admin"} rel={"noreferrer"} onClick={closeNav}>
-                        Admin
-                    </a>
-                </Menu.Item>
-            )}
-            <Menu.Item key="3" icon={<LogoutOutlined />} onClick={onTriggerLogout}>
-                Sign Out
-            </Menu.Item>
-        </Menu>
-    );
+    const [menuVisible, setMenuVisible] = React.useState(false);
+
+    const toggleMenu = () => {
+        setMenuVisible(!menuVisible);
+    };
 
     return (
-        <div css={tw`flex items-center p-4`}>
-            <Gravatar email={email} size={40} css={tw`rounded-full`} />
+        <div css={tw`flex items-center p-4 relative`}>
+            <div css={tw`rounded-full bg-gray-300`} style={{ width: 40, height: 40 }} />
             <div css={tw`ml-4`}>
                 <span>{userName}</span>
-                <Dropdown overlay={menu} trigger={['click']}>
-                    <DownOutlined css={tw`ml-2 cursor-pointer`} />
-                </Dropdown>
+                <DownOutlined css={tw`ml-2 cursor-pointer`} onClick={toggleMenu} />
+                {menuVisible && (
+                    <div css={tw`absolute right-0 mt-2 w-48 bg-white border rounded shadow-lg`}>
+                        <div css={tw`p-2`}>
+                            <NavLink to={"/account"} exact onClick={closeNav} css={tw`flex items-center p-2 hover:bg-gray-100`}>
+                                <UserOutlined css={tw`mr-2`} />
+                                Account
+                            </NavLink>
+                            {rootAdmin && (
+                                <a href={"/admin"} rel={"noreferrer"} onClick={closeNav} css={tw`flex items-center p-2 hover:bg-gray-100`}>
+                                    <SettingOutlined css={tw`mr-2`} />
+                                    Admin
+                                </a>
+                            )}
+                            <div onClick={onTriggerLogout} css={tw`flex items-center p-2 hover:bg-gray-100 cursor-pointer`}>
+                                <LogoutOutlined css={tw`mr-2`} />
+                                Sign Out
+                            </div>
+                        </div>
+                    </div>
+                )}
             </div>
         </div>
     );
