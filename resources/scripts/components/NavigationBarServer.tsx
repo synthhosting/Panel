@@ -26,7 +26,8 @@ import LogoContainer from "@/components/elements/helionix/navigation/LogoContain
 import CategoryContainer from "@/components/elements/helionix/navigation/CategoryContainer";
 import NavigationButton from "@/components/elements/helionix/navigation/NavigationButton";
 import LcIcon from '@/components/elements/LcIcon';
-import UserProfile from './UserProfile';
+import UserAvatar from '@/components/UserAvatar';
+import { ServerIcon, UserCircleIcon, DotsVerticalIcon, CogIcon, EyeIcon, MoonIcon, LogoutIcon } from '@heroicons/react/outline';
 
 export default () => {
     const logo = useStoreState((state: ApplicationStore) => state.helionix.data!.logo);
@@ -174,7 +175,41 @@ export default () => {
                     </a>
                 )}
             </NavigationBar>
-            <UserProfile email={userEmail} userName={userName} rootAdmin={rootAdmin} onTriggerLogout={onTriggerLogout} closeNav={closeNav} />
+            <div className="sticky bottom-0 bg-gray-700 pb-4 px-5 z-20 mt-auto backdrop-blur-xl">
+            <hr className={'border-b border-gray-500 mb-4'}/>
+            <div className="flex w-full justify-between items-center">
+                <Link to="/account" className="flex items-center gap-x-2">
+                    <UserAvatar /> 
+                    <div>
+                        <p>{t('account')}</p>
+                    </div>
+                </Link>
+                <DropdownMenu
+                    ref={onClickRef}
+                    sideBar
+                    renderToggle={(onClick) => (
+                        <div onClick={onClick} className="cursor-pointer text-gray-50 p-2">
+                            <DotsVerticalIcon className="w-5" />
+                        </div>
+                    )}
+                >
+                    {rootAdmin && <DropdownLinkRow href="/admin">
+                        <CogIcon className="w-5" /> {t('admin-view')}
+                    </DropdownLinkRow> }
+                    <DropdownLinkRow href="/account/activity">
+                        <EyeIcon className="w-5" /> {t('account-activity')}
+                    </DropdownLinkRow>
+                    {String(modeToggler) == 'true' &&
+                    <DropdownButtonRow onClick={toggleDarkMode}>
+                        <MoonIcon className="w-5" /> {t('dark-light-mode')}
+                    </DropdownButtonRow>}
+                    <hr className={'border-b border-gray-500 my-2'}/>
+                    <DropdownButtonRow danger onClick={onTriggerLogout}>
+                        <LogoutIcon className="w-5" /> {t('logout')}
+                    </DropdownButtonRow>
+                </DropdownMenu>
+            </div>
+        </div>
         </Navigation>
       </>
     );
