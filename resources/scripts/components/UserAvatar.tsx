@@ -12,7 +12,7 @@ interface Props {
 }
 
 export default ({ email, user, uuid, width, rounded }: Props) => {
-    const profileType = useStoreState((state: ApplicationStore) => state.settings.data!.profileType);
+    const profileType = useStoreState((state: ApplicationStore) => state.settings.data?.profileType);
     const username = useStoreState((state) => state.user.data?.username);
     const useremail = useStoreState(state => state.user.data?.email);
 
