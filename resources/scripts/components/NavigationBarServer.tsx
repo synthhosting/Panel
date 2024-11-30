@@ -38,6 +38,8 @@ export default () => {
     const uptime = useStoreState((state: ApplicationStore) => state.helionix.data!.uptime_nodes_status);
     const serverNestId = ServerContext.useStoreState((state) => state.server.data?.nestId);
     const serverEggId = ServerContext.useStoreState((state) => state.server.data?.eggId);
+    const userEmail = useStoreState((state: ApplicationStore) => state.user.data!.email);
+    const userName = useStoreState((state: ApplicationStore) => state.user.data!.username);
     const [isLoggingOut, setIsLoggingOut] = useState(false);
     const [isNavVisible, setIsNavVisible] = useState(false);
     const navRef = useRef<HTMLDivElement>(null);
@@ -171,25 +173,8 @@ export default () => {
                         <NavigationButton>Manage</NavigationButton>
                     </a>
                 )}
-                <CategoryContainer>
-                    <a>Management</a>
-                </CategoryContainer>
-                <NavLink to={"/account"} exact onClick={closeNav} css={tw`flex`}>
-                    <LcIcon icon={User} size={20} />
-                    <NavigationButton>Account</NavigationButton>
-                </NavLink>
-                {rootAdmin && (
-                    <a href={"/admin"} rel={"noreferrer"} onClick={closeNav} css={tw`flex`}>
-                        <LcIcon icon={Shield} size={20}/>
-                        <NavigationButton>Admin</NavigationButton>
-                    </a>
-                )}
-                <a onClick={onTriggerLogout} css={tw`flex`}>
-                    <LcIcon icon={LogOut} size={20}/>
-                    <NavigationButton>Sign Out</NavigationButton>
-                </a>
             </NavigationBar>
-            <UserProfile email="user@example.com" userName="John Doe" rootAdmin={rootAdmin} onTriggerLogout={onTriggerLogout} closeNav={closeNav} />
+            <UserProfile email={userEmail} userName={userName} rootAdmin={rootAdmin} onTriggerLogout={onTriggerLogout} closeNav={closeNav} />
         </Navigation>
       </>
     );
