@@ -26,6 +26,7 @@ import LogoContainer from "@/components/elements/helionix/navigation/LogoContain
 import CategoryContainer from "@/components/elements/helionix/navigation/CategoryContainer";
 import NavigationButton from "@/components/elements/helionix/navigation/NavigationButton";
 import LcIcon from '@/components/elements/LcIcon';
+import UserProfile from './UserProfile';
 
 export default () => {
     const logo = useStoreState((state: ApplicationStore) => state.helionix.data!.logo);
@@ -188,6 +189,7 @@ export default () => {
                     <NavigationButton>Sign Out</NavigationButton>
                 </a>
             </NavigationBar>
+            <UserProfile email="user@example.com" userName="John Doe" rootAdmin={rootAdmin} onTriggerLogout={onTriggerLogout} closeNav={closeNav} />
         </Navigation>
       </>
     );
