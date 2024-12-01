@@ -32,4 +32,5 @@ return [
 
     'curseforge_api_key' => env('CURSEFORGE_API_KEY'),
     
+    
 ];
